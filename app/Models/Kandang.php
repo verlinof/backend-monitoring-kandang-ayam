@@ -14,11 +14,12 @@ class Kandang extends Model
 
     protected $fillable = [
         'nama_kandang',
-        'username'
+        'id_user',
+        'populasi'
     ];
 
     protected $guarded = [
-        
+        'id_kandang'
     ];
 
     public function User(){

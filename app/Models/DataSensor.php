@@ -10,6 +10,22 @@ class Data extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'id_kandang',
+        'suhu',
+        'kelembaban',
+        'amoniak',
+    ];
+
+    protected $guarded = [
+        'id_data_sensor',
+        'classification'
+    ];
+
+    protected $cast = [
+        'date' => 'datetime'
+    ];
+
     public function Kandang(){
         return $this->belongsToMany(Kandang::class);
     }

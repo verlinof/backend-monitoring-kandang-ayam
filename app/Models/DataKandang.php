@@ -11,6 +11,23 @@ class DataKandang extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'id_kandang',
+        'hari_ke',
+        'kematian',
+        'pakan',
+        'minum',
+        'id_user',
+    ];
+
+    protected $guarded = [
+        'id_data_kandang'
+    ];
+
+    protected $cast = [
+        'date' => 'datetime'
+    ];
+
     public function User(){
         return $this->belongsTo(User::class, 'id_user', 'id_user');
     }
