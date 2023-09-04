@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
+use App\Models\DataSensor;
+use App\Models\DataKandang;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Kandang extends Model
 {
@@ -17,5 +20,17 @@ class Kandang extends Model
     protected $guarded = [
         
     ];
+
+    public function User(){
+        return $this->belongsTo(User::class);
+    }
+
+    public function DataKandang(){
+        return $this->hasMany(DataKandang::class);
+    }
+
+    public function DataSensor(){
+        return $this->hasMany(DataSensor::class);
+    }
 
 }
