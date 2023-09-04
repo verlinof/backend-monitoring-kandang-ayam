@@ -13,13 +13,17 @@ return new class extends Migration
     {
         Schema::create('data_kandang', function (Blueprint $table) {
             $table->id('id_data_kandang');
-            $table->foreignId('id_kandang');
+            $table->unsignedBigInteger('id_kandang');
             $table->timestamp('date');
             $table->integer('hari_ke');
             $table->integer('kematian');
             $table->float('pakan');
             $table->float('minum');
-            $table->foreignId('id_user');
+            $table->unsignedBigInteger('id_user');
+
+            //Relasi
+            $table->foreign('id_kandang')->references('id_kandang')->on('kandang');
+            $table->foreign('id_user')->references('id_user')->on('user');
         });
     }
     
