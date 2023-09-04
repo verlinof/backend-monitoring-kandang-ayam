@@ -13,15 +13,16 @@ return new class extends Migration
     {
         Schema::create('data_kandang', function (Blueprint $table) {
             $table->id('id_data_kandang');
-            $table->date('waktu');
-            $table->integer('populasi');
-            $table->integer('pakan');
-            $table->integer('minum');
-            $table->enum('keterangan',['normal','abnormal']);
             $table->foreignId('id_kandang');
-            $table->timestamps();
+            $table->timestamp('date');
+            $table->integer('hari_ke');
+            $table->integer('kematian');
+            $table->float('pakan');
+            $table->float('minum');
+            $table->foreignId('id_user');
         });
     }
+    
 
     /**
      * Reverse the migrations.

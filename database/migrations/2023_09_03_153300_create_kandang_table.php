@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('kandang', function (Blueprint $table) {
             $table->id('id_kandang');
-            $table->enum('nama_kandang', ['kandang1','kandang2', 'kandang3']);
-            $table->foreignId('id_pengguna');
-            $table->timestamps();
+            $table->foreignId('id_user');
+            $table->string('nama_kandang')->unique();
+            $table->integer('populasi');
         });
     }
 

@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('data_sensor', function (Blueprint $table) {
             $table->id('id_data_sensor');
-            $table->date('waktu');
-            $table->string('suhu');
-            $table->string('kelembaban');
-            $table->string('amoniak');
             $table->foreignId('id_kandang');
-            $table->timestamps();
+            $table->timestamp('date');
+            $table->integer('suhu');
+            $table->integer('kelembaban');
+            $table->integer('amoniak');
+            $table->enum('classification', ['normal', 'abnormal']);
         });
     }
 
