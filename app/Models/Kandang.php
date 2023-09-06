@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\Panen;
 use App\Models\DataSensor;
 use App\Models\DataKandang;
 use Illuminate\Database\Eloquent\Model;
@@ -34,4 +35,7 @@ class Kandang extends Model
         return $this->hasMany(DataSensor::class);
     }
 
+    public function Panen(){
+        return $this->hasMany(Panen::class);
+    }
 }

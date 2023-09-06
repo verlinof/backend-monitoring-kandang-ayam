@@ -24,10 +24,6 @@ class DataKandang extends Model
         'id_data_kandang'
     ];
 
-    protected $cast = [
-        'date' => 'datetime'
-    ];
-
     public function User(){
         return $this->belongsTo(User::class, 'id_user', 'id_user');
     }

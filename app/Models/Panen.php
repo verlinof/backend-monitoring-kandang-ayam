@@ -6,24 +6,22 @@ use App\Models\Kandang;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Data extends Model
+class Panen extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'id_kandang',
-        'suhu',
-        'kelembaban',
-        'amoniak',
+        'tanggal_mulai',
+        'jumlah_panen'
     ];
 
     protected $guarded = [
-        'id_data_sensor',
-        'classification'
+        'id_panen',
+        'tanggal_panen'
     ];
 
     public function Kandang(){
-        return $this->belongsToMany(Kandang::class);
+        return $this->belongsTo(Kandang::class);
     }
-
 }
