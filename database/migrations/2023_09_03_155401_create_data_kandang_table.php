@@ -13,17 +13,18 @@ return new class extends Migration
     {
         Schema::create('data_kandang', function (Blueprint $table) {
             $table->id('id_data_kandang');
-            $table->unsignedBigInteger('id_kandang');
-            $table->timestamp('date');
+            $table->foreignId('id_kandang');
+            $table->foreignId('id_kematian');
             $table->integer('hari_ke');
-            $table->integer('kematian');
             $table->float('pakan');
             $table->float('minum');
-            $table->unsignedBigInteger('id_user');
+            $table->float('bobot');
+            $table->timestamp('date');
+            $table->enum('classification',['normal','abnormal']);
 
             //Relasi
             $table->foreign('id_kandang')->references('id_kandang')->on('kandang');
-            $table->foreign('id_user')->references('id_user')->on('user');
+            $table->foreign('id_kematian')->references('id_kematian')->on('kematian');
         });
     }
     

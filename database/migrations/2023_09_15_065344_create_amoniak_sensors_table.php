@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('data_sensor', function (Blueprint $table) {
-            $table->id('id_data_sensor');
-            $table->unsignedBigInteger('id_kandang');
+        Schema::create('amoniak_sensors', function (Blueprint $table) {
+            $table->id('id_amoniak_sensor');
+            $table->foreignId('id_kandang');
             $table->timestamp('date');
-            $table->integer('suhu');
-            $table->integer('kelembaban');
             $table->integer('amoniak');
-            $table->enum('classification', ['normal', 'abnormal']);
 
             //Relasi
             $table->foreign('id_kandang')->references('id_kandang')->on('kandang');
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('data_sensor');
+        Schema::dropIfExists('amoniak_sensors');
     }
 };

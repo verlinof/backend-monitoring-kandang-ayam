@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('kandang', function (Blueprint $table) {
             $table->id('id_kandang');
-            $table->unsignedBigInteger('id_user');
+            $table->foreignId('id_user');
+            $table->integer('populasi_awal');
             $table->string('nama_kandang')->unique();
-            $table->integer('populasi');
+            $table->string('alamat_kandang');
 
             //Relasi
-            $table->foreign('id_user')->references('id_user')->on('user');
+            $table->foreign('id_user')->references('id_user')->on('users');
         });
     }
 
