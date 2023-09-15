@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('amoniak');
 
             //Relasi
-            $table->foreign('id_kandang')->references('id_kandang')->on('kandang');
+            $table->foreign('id_kandang')->references('id_kandang')->on('kandang')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

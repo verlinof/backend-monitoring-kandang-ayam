@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Kandang;
+use App\Models\DataKandang;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -40,15 +41,14 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
 
     public function Kandang(){
-        return $this->hasOne(Kandang::class);
+        return $this->hasMany(Kandang::class);
     }
 
     public function DataKandang(){
-        return $this->hasMany(DataKandang::class);
+        return $this->hasManyThrough(DataKandang::class, Kandang::class);
     }
 }

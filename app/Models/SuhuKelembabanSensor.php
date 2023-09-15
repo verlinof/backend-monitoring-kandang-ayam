@@ -2,15 +2,15 @@
 
 namespace App\Models;
 
-use App\Models\DataKandang;
+use App\Models\Kandang;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class DataKematian extends Model
+class SuhuKelembabanSensor extends Model
 {
     use HasFactory;
 
-    public function DataKandang(){
-        return $this->belongsTo(DataKandang::class);
+    public function Kandang(){
+        return $this->belongsTo(Kandang::class);
     }
 }

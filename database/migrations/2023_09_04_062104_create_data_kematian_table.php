@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignId('id_data_kandang');
             $table->integer('kematian_terbaru');
             $table->integer('jumlah_kematian');
-            $table->int('jam_awal');
-            $table->int('jam_akhir');
+            $table->integer('jam_awal');
+            $table->integer('jam_akhir');
             $table->timestamp('hari');
 
             //Relasi
