@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id('id_panen');
             $table->foreignId('id_kandang');
             $table->date('tanggal_mulai');
-            $table->integer("jumlah_panen");
             $table->timestamp('tanggal_panen');
+            $table->integer("jumlah_panen");
             $table->integer('bobot_total');
             
             //Relasi
