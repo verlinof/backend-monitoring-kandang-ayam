@@ -19,7 +19,7 @@ return new class extends Migration
             $table->timestamp('date');
 
             //Relasi
-            $table->foreign('id_kandang')->references('id_kandang')->on('kandang')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_kandang')->references('id_kandang')->on('kandangs');
         });
     }
 

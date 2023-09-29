@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kandang', function (Blueprint $table) {
+        Schema::create('kandangs', function (Blueprint $table) {
             $table->id('id_kandang');
             $table->foreignId('id_user');
             $table->string('nama_kandang')->unique();
@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('alamat_kandang');
 
             //Relasi
-            $table->foreign('id_user')->references('id_user')->on('users');
+            $table->foreign('id_user')->references('id')->on('users');
         });
     }
 

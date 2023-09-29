@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('panen', function (Blueprint $table) {
+        Schema::create('panens', function (Blueprint $table) {
             $table->id('id_panen');
             $table->foreignId('id_kandang');
             $table->date('tanggal_mulai');
@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('bobot_total');
             
             //Relasi
-            $table->foreign('id_kandang')->references('id_kandang')->on('kandang');
+            $table->foreign('id_kandang')->references('id_kandang')->on('kandangs');
         });
     }
 
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('panen');
+        Schema::dropIfExists('panens');
     }
 };

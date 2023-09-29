@@ -11,27 +11,24 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('data_kandang', function (Blueprint $table) {
-            $table->id('id_data_kandang');
+        Schema::create('rekap_datas', function (Blueprint $table) {
+            $table->id('id_rekap_data');
             $table->foreignId('id_kandang');
-            $table->integer('hari_ke');
+            $table->date('hari');
+            $table->float('rata_rata_amoniak');
+            $table->float('rata_rata_suhu');
+            $table->float('rata_rata_kelembaban');
             $table->float('pakan');
             $table->float('minum');
-            $table->float('bobot');
-            $table->timestamp('date');
-            $table->enum('classification',['normal','abnormal']);
-
-            //Relasi
-            $table->foreign('id_kandang')->references('id_kandang')->on('kandang');
+            $table->integer('jumlah_kematian');
         });
     }
-    
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('data_kandang');
+        Schema::dropIfExists('rekap_datas');
     }
 };

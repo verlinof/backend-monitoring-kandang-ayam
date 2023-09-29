@@ -20,9 +20,12 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'nama_lengkap',
         'username',
+        'email',
+        'status',
         'password',
-        'status'
+        'phone_number'
     ];
 
     /**
@@ -45,7 +48,7 @@ class User extends Authenticatable
     ];
 
     public function Kandang(){
-        return $this->hasMany(Kandang::class);
+        return $this->hasMany(Kandang::class, 'id_user', 'id');
     }
 
     public function DataKandang(){

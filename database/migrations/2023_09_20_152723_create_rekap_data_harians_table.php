@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rekap_data_harian', function (Blueprint $table) {
+        Schema::create('rekap_data_harians', function (Blueprint $table) {
             $table->id('id_rekap_harian');
             $table->foreignId('id_kandang');
             $table->date('date');
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rekap_data_harian');
+        Schema::dropIfExists('rekap_data_harians');
     }
 };

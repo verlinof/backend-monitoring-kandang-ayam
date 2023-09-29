@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('data_kematian', function (Blueprint $table) {
+        Schema::create('data_kematians', function (Blueprint $table) {
             $table->id('id_data_kematian');
             $table->foreignId('id_data_kandang');
             $table->integer('kematian_terbaru');
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->timestamp('hari');
 
             //Relasi
-            $table->foreign('id_data_kandang')->references('id_data_kandang')->on('data_kandang');
+            $table->foreign('id_data_kandang')->references('id_data_kandang')->on('data_kandangs');
         });
     }
 
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('data_kematian');
+        Schema::dropIfExists('data_kematians');
     }
 };
