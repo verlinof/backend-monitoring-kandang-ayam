@@ -61,11 +61,11 @@ class AuthenticationController extends Controller
             return response()->json([
                 'username' => $user->username,
                 'status' => 'Success'
-            ]);
+            ],200);
         }catch(Exception $e){
             return response()->json([
                 'error' => $e
-            ]);
+            ],400);
         } 
     }
 
@@ -73,6 +73,9 @@ class AuthenticationController extends Controller
     {
         try{
             return $request->user()->currentAccessToken()->delete();
+            return response()->json([
+                "status" => "Berhasil Logout"
+            ],200);
         }catch(Exception $e){
             return response()->json([
                 "error" => $e
