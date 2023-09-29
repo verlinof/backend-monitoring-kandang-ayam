@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('alamat_kandang');
 
             //Relasi
-            $table->foreign('id_user')->references('id_user')->on('users');
+            $table->foreign('id_user')->references('id')->on('users');
         });
     }
 
