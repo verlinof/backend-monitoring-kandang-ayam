@@ -14,11 +14,8 @@ return new class extends Migration
         Schema::create('data_kematians', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_data_kandang');
-            $table->integer('kematian_terbaru');
             $table->integer('jumlah_kematian');
-            $table->integer('jam_awal');
-            $table->integer('jam_akhir');
-            $table->timestamp('hari');
+            $table->integer('jam');
 
             //Relasi
             $table->foreign('id_data_kandang')->references('id')->on('data_kandangs');

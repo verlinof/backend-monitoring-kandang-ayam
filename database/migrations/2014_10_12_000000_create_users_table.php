@@ -18,9 +18,7 @@ return new class extends Migration
             $table->string('password');
             $table->enum('status', ['owner','anak kandang']);
             $table->string('email');
-            $table->string('phone_number');
-            $table->rememberToken();
-            $table->timestamps();
+            $table->string('no_telepon');
         });
     }
 

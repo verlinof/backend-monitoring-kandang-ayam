@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('id_user');
             $table->string('nama_kandang')->unique();
+            $table->integer('luas_kandang');
             $table->integer('populasi_awal');
             $table->string('alamat_kandang');
 

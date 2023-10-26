@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('id_kandang');
             $table->string('message');
-            $table->timestamps();
+            $table->timestamp('date');
 
             //Relasi
             $table->foreign('id_kandang')->references('id')->on('kandangs');
