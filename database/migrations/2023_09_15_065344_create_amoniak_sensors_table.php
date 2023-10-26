@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('amoniak_sensors', function (Blueprint $table) {
-            $table->id('id_amoniak_sensor');
+            $table->id();
             $table->foreignId('id_kandang');
             $table->timestamp('date');
             $table->integer('amoniak');
 
             //Relasi
-            $table->foreign('id_kandang')->references('id_kandang')->on('kandangs');
+            $table->foreign('id_kandang')->references('id')->on('kandangs');
         });
     }
 

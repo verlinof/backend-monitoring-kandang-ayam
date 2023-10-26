@@ -18,8 +18,6 @@ class OwnerController extends Controller
     public function index()
     {
         try{
-            $user = Auth::user();
-            
             $kandang = Kandang::with('User:id,username')->get();
             return KandangDetailResource::collection($kandang);
         }catch(Exception $e) {

@@ -8,38 +8,21 @@ use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use PhpParser\Node\Stmt\TryCatch;
 
 class UserController extends Controller
 {
-    //Memperlihatkan semua kandang yang diawasi anak kandang
+
     public function index()
     {
-        try{
-            $user = Auth::user();
-            
-            $kandang = Kandang::where('id_user', $user->id)->get();
-            return KandangDetailResource::collection($kandang);
-        }catch(Exception $e) {
-            return response()->json([
-                "error" => $e
-            ]);
-        }
-    }
 
-    //Get semua kandang oleh owner
-    public function ownerIndex()
+    }
+    
+    /**
+     * Display the specified resource.
+     */
+    public function show($id)
     {
-        try{
-            $user = Auth::user();
-            
-            $kandang = Kandang::with('User:id,username')->get();
-            return KandangDetailResource::collection($kandang);
-        }catch(Exception $e) {
-            return response()->json([
-                "error" => $e
-            ]);
-        }
+
     }
 
     /**
@@ -50,13 +33,6 @@ class UserController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(User $user)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
