@@ -11,17 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rekap_data_harians', function (Blueprint $table) {
+        Schema::create('notifications', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_kandang');
-            $table->date('date');
-            $table->integer('amoniak');
-            $table->integer('suhu');
-            $table->integer('kelembaban');
+            $table->string('message');
+            $table->timestamps();
 
             //Relasi
             $table->foreign('id_kandang')->references('id')->on('kandangs');
-            
         });
     }
 
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rekap_data_harians');
+        Schema::dropIfExists('notifications');
     }
 };
