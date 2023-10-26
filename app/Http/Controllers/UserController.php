@@ -3,26 +3,38 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\KandangDetailResource;
+use App\Http\Resources\UserDetailResource;
 use App\Models\Kandang;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-
+    //GET semua anak kandang oleh owner
     public function index()
     {
-
+        try{
+            $user = User::where('status', '!=', 'owner')->get();
+            return UserDetailResource::collection($user);
+        }catch(Exception $e) {
+            return response()->json([
+                "error" => $e
+            ],400);
+        }
     }
     
-    /**
-     * Display the specified resource.
-     */
     public function show($id)
     {
-
+        try{
+            $user = User::findOrFail($id);
+         
+            return new UserDetailResource($user);
+        }catch(Exception $e) {
+            return response()->json([
+                "error" => $e
+            ],400);
+        }
     }
 
     /**

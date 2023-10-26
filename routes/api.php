@@ -20,18 +20,31 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [AuthenticationController::class, 'login']);
 
-Route::post('/register', [AuthenticationController::class, 'register']);
+Route::post('/register-anak-kandang', [AuthenticationController::class, 'registerAnakKandang']);
+Route::post('/register-owner', [AuthenticationController::class, 'registerOwner']);
 
 Route::middleware(['auth:sanctum'])->group( function () {
     //Logout
     Route::get('/logout', [AuthenticationController::class, 'logout']);
 
     //API Kandang(Anak Kandang)
-    Route::get('/kandang', [UserController::class, 'index']);
-    Route::get('/kandang/{kandang:id}', [UserController::class, 'show']);
+    Route::get('/kandang', [KandangController::class, 'index']);
+    Route::get('/kandang/{id}', [KandangController::class, 'show']);
 
-    //API Kandang (Owner)
-    Route::post('/kandang', [KandangController::class, 'store']);
-    //Owner access bisa melihat semua kandang yang dimiliki
-    Route::get('/owner/kandang', [OwnerController::class, 'index']);
+    Route::middleware(['owner-access'])->group(function () {
+        //API buat kandang baru
+        Route::post('/kandang', [KandangController::class, 'store']);
+        //API untuk update kandang
+        Route::patch('/kandang{id}', [KandangController::class, 'update']);
+        Route::delete('/kandang{id}', [KandangController::class, 'destroy']);
+        
+        //Owner access bisa melihat semua kandang yang dimiliki
+        Route::get('/owner/kandang', [OwnerController::class, 'index']);
+        
+        //Owner bisa melihat semua user yang statusnya anak kandang
+        Route::get('/owner/user', [UserController::class, 'index']);
+        //Owner bisa melihat anak kandang berdasarkan ID
+        Route::get('/owner/user/{id}', [UserController::class, 'show']);
+    });
+
 });

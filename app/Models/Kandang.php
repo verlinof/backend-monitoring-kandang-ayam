@@ -30,18 +30,18 @@ class Kandang extends Model
     }
 
     public function DataKandang(){
-        return $this->hasMany(DataKandang::class);
+        return $this->hasMany(DataKandang::class, 'id_kandang', 'id');
     }
 
     public function AmoniakSensors(){
-        return $this->hasMany(AmoniakSensor::class);
+        return $this->hasMany(AmoniakSensor::class, 'id_kandang', 'id');
     }
 
     public function SuhuKelembabanSensors(){
-        return $this->hasMany(SuhuKelembabanSensor::class);
+        return $this->hasMany(SuhuKelembabanSensor::class, 'id_kandang', 'id');
     }
 
     public function Panen(){
-        return $this->hasMany(Panen::class);
+        return $this->hasMany(Panen::class, 'id_kandang', 'id');
     }
 }

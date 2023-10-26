@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('data_kematians', function (Blueprint $table) {
+        Schema::create('populations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_population');
-            $table->integer('jumlah_kematian');
-            $table->integer('jam');
+            $table->foreignId('id_kandang');
+            $table->integer('populasi');
+            $table->integer('total_kematian');
 
-            //Relasi
-            $table->foreign('id_population')->references('id')->on('populations');
+            $table->foreign('id_kandang')->references('id')->on('kandangs');
         });
     }
 
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('data_kematians');
+        Schema::dropIfExists('populations');
     }
 };

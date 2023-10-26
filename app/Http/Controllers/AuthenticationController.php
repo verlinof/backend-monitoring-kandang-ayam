@@ -38,13 +38,12 @@ class AuthenticationController extends Controller
         
     }
 
-    public function register(Request $request)
+    public function registerAnakKandang(Request $request)
     {
         $validated = $request->validate([
             'nama_lengkap' => 'required',
             'username' => 'required|max:50',
             'email' => 'required|email',
-            'status' => 'required|in:owner,anak kandang',
             'password' => 'required|max:50',
             'phone_number' => 'required'
         ]);
@@ -54,7 +53,37 @@ class AuthenticationController extends Controller
                 'nama_lengkap' => $validated['nama_lengkap'],
                 'username' => $validated['username'],
                 'email' => $validated['email'],
-                'status' => $validated['status'],
+                'status' => 'anak kandang',
+                'password' => Hash::make($validated['password']),
+                'phone_number' => $validated['phone_number']
+            ]);
+            return response()->json([
+                'username' => $user->username,
+                'status' => 'Success'
+            ],200);
+        }catch(Exception $e){
+            return response()->json([
+                'error' => $e
+            ],400);
+        } 
+    }
+
+    public function registerOwner(Request $request)
+    {
+        $validated = $request->validate([
+            'nama_lengkap' => 'required',
+            'username' => 'required|max:50',
+            'email' => 'required|email',
+            'password' => 'required|max:50',
+            'phone_number' => 'required'
+        ]);
+   
+        try{
+            $user = User::create([
+                'nama_lengkap' => $validated['nama_lengkap'],
+                'username' => $validated['username'],
+                'email' => $validated['email'],
+                'status' => 'owner',
                 'password' => Hash::make($validated['password']),
                 'phone_number' => $validated['phone_number']
             ]);

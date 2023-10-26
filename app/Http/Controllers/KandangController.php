@@ -38,7 +38,7 @@ class KandangController extends Controller
                 'nama_kandang' => 'required|max:255',
                 'id_user' => 'required|exists:users,id',
                 'populasi_awal' => 'integer',
-                'alamat_kandang' => 'required',
+                'alamat_kandang' => 'required|max:255',
             ]);
 
             Kandang::create($request->all());
@@ -60,10 +60,10 @@ class KandangController extends Controller
     }
 
     #Menampilkan kandang spesifik
-    public function show(Kandang $kandang)
+    public function show($id)
     {
         try{
-            $kandang = Kandang::where('id_kandang', $kandang->id)->first();      
+            $kandang = Kandang::findOrFail($id);
             return new KandangDetailResource($kandang->loadMissing('User:id,username'));
         }catch(Exception $e){
             return response()->json([
@@ -83,14 +83,42 @@ class KandangController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateKandangRequest $request, Kandang $kandang)
+    public function update(Request $request, $id)
     {
-        //
+        try{
+            $request->validate([
+                'nama_kandang' => 'required|max:255',
+                'id_user' => 'required|exists:users,id',
+                'populasi_awal' => 'integer',
+                'alamat_kandang' => 'required|max:255',
+            ]);
+
+            $kandang = Kandang::findOrFail($id);
+            $kandang->update($request->all());
+            
+            return new KandangDetailResource($request);
+
+        }catch(Exception $e) {
+            return response()->json([
+                "error" => $e
+            ], 404);
+        }
     }
 
     #API untuk menghapus suatu kandang
-    public function destroy(Kandang $kandang)
+    public function destroy($id)
     {
-        
+        try{
+            $kandang = Kandang::findOrFail($id);
+            $kandang->delete();
+
+            return response()->json([
+                "status" => "Kandang Berhasil Dihapus"
+            ]);
+        }catch(Exception $e){
+            return response()->json([
+                "error" => $e
+            ],404);
+        }
     }
 }
