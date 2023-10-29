@@ -19,7 +19,6 @@ return new class extends Migration
             $table->float('minum');
             $table->float('bobot');
             $table->timestamp('date');
-            $table->enum('classification',['normal','abnormal']);
 
             //Relasi
             $table->foreign('id_kandang')->references('id')->on('kandangs');

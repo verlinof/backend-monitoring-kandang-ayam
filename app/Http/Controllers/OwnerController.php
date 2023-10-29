@@ -12,9 +12,7 @@ use App\Http\Resources\KandangDetailResource;
 
 class OwnerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    //GET semua kandang yang ada
     public function index()
     {
         try{
@@ -27,9 +25,6 @@ class OwnerController extends Controller
         }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         //

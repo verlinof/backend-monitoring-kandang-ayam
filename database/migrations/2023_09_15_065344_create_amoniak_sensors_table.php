@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('amoniak_sensors', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_kandang');
-            $table->timestamp('date');
+            $table->timestamp('time');
             $table->integer('amoniak');
 
             //Relasi

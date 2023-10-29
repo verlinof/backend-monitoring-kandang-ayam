@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('rekap_datas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_kandang');
-            $table->date('hari');
-            $table->float('rata_rata_amoniak');
-            $table->float('rata_rata_suhu');
-            $table->float('rata_rata_kelembaban');
+            $table->date('date');
+            $table->float('avg_amoniak');
+            $table->float('avg_suhu');
+            $table->float('avg_kelembaban');
             $table->float('pakan');
             $table->float('minum');
             $table->integer('jumlah_kematian');

@@ -8,24 +8,22 @@ use App\Models\DataKandang;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+    public $timestamps = false;
+
     protected $fillable = [
         'nama_lengkap',
         'username',
         'email',
         'status',
         'password',
-        'phone_number'
+        'no_telepon'
     ];
 
     /**
@@ -35,23 +33,10 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'password' => 'hashed',
-    ];
-
-    public function Kandang(){
+    public function Kandang(): HasMany
+    {
         return $this->hasMany(Kandang::class, 'id_user', 'id');
-    }
-
-    public function DataKandang(){
-        return $this->hasManyThrough(DataKandang::class, Kandang::class);
     }
 }

@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kandangs', function (Blueprint $table) {
+        Schema::create('populations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_user');
-            $table->string('nama_kandang')->unique();
-            $table->integer('luas_kandang');
-            $table->string('alamat_kandang');
+            $table->foreignId('id_kandang');
+            $table->integer('populasi');
+            $table->integer('total_kematian');
 
-            //Relasi
-            $table->foreign('id_user')->references('id')->on('users');
+            $table->foreign('id_kandang')->references('id')->on('kandangs');
         });
     }
 
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('kandang');
+        Schema::dropIfExists('populations');
     }
 };
