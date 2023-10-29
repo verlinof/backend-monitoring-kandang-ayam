@@ -9,23 +9,27 @@ use App\Models\AmoniakSensor;
 use App\Models\SuhuKelembabanSensor;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Kandang extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $fillable = [
         'nama_kandang',
         'id_user',
-        'populasi_awal',
-        'alamat_kandang'
+        'alamat_kandang',
+        'luas_kandang'
     ];
 
     protected $guarded = [
         'id_kandang'
     ];
 
-    public function User(){
+    public function User(): BelongsTo
+    {
         return $this->belongsTo(User::class, 'id_user', 'id');
     }
 

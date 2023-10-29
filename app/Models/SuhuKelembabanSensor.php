@@ -15,10 +15,6 @@ class SuhuKelembabanSensor extends Model
         'suhu', 'kelembaban'
     ];
 
-    // protected $casts = [
-    //     'waktu' => 'timestamp'
-    // ];
-
     public function Kandang(){
         return $this->belongsTo(Kandang::class);
     }

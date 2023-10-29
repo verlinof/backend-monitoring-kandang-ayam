@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [AuthenticationController::class, 'login']);
 
+// Register akun dibagi 2, buat anak kandang ma owner
 Route::post('/register-anak-kandang', [AuthenticationController::class, 'registerAnakKandang']);
 Route::post('/register-owner', [AuthenticationController::class, 'registerOwner']);
 
@@ -31,16 +32,27 @@ Route::middleware(['auth:sanctum'])->group( function () {
     Route::get('/kandang', [KandangController::class, 'index']);
     Route::get('/kandang/{id}', [KandangController::class, 'show']);
 
+    //API untuk account
+    Route::middleware(['pemilik-akun'])->group(function () {
+        //API user mengupdate informasi diri
+        Route::patch('/user/{id}', [UserController::class, 'update']);
+    });
+    
+    Route::delete('/user', [UserController::class, 'destroy']);
+
+    //API untuk Owner
     Route::middleware(['owner-access'])->group(function () {
+        //KANDANG
         //API buat kandang baru
-        Route::post('/kandang', [KandangController::class, 'store']);
+        Route::post('/owner/kandang', [KandangController::class, 'store']);
         //API untuk update kandang
-        Route::patch('/kandang{id}', [KandangController::class, 'update']);
-        Route::delete('/kandang{id}', [KandangController::class, 'destroy']);
-        
+        Route::patch('/owner/kandang/{id}', [KandangController::class, 'update']);
+        // API untuk delete kandang
+        Route::delete('/owner/kandang/{id}', [KandangController::class, 'destroy']);
         //Owner access bisa melihat semua kandang yang dimiliki
         Route::get('/owner/kandang', [OwnerController::class, 'index']);
-        
+
+        //USER
         //Owner bisa melihat semua user yang statusnya anak kandang
         Route::get('/owner/user', [UserController::class, 'index']);
         //Owner bisa melihat anak kandang berdasarkan ID

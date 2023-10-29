@@ -45,7 +45,7 @@ class AuthenticationController extends Controller
             'username' => 'required|max:50',
             'email' => 'required|email',
             'password' => 'required|max:50',
-            'phone_number' => 'required'
+            'no_telepon' => 'required'
         ]);
    
         try{
@@ -55,7 +55,7 @@ class AuthenticationController extends Controller
                 'email' => $validated['email'],
                 'status' => 'anak kandang',
                 'password' => Hash::make($validated['password']),
-                'phone_number' => $validated['phone_number']
+                'no_telepon' => $validated['no_telepon']
             ]);
             return response()->json([
                 'username' => $user->username,
@@ -75,7 +75,7 @@ class AuthenticationController extends Controller
             'username' => 'required|max:50',
             'email' => 'required|email',
             'password' => 'required|max:50',
-            'phone_number' => 'required'
+            'no_telepon' => 'required'
         ]);
    
         try{
@@ -85,7 +85,7 @@ class AuthenticationController extends Controller
                 'email' => $validated['email'],
                 'status' => 'owner',
                 'password' => Hash::make($validated['password']),
-                'phone_number' => $validated['phone_number']
+                'no_telepon' => $validated['no_telepon']
             ]);
             return response()->json([
                 'username' => $user->username,
@@ -101,8 +101,10 @@ class AuthenticationController extends Controller
     public function logout(Request $request)
     {
         try{
-            return $request->user()->currentAccessToken()->delete();
+            $username = $request->user()->username;
+            $request->user()->currentAccessToken()->delete();
             return response()->json([
+                "username" => $username,
                 "status" => "Berhasil Logout"
             ],200);
         }catch(Exception $e){
