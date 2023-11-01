@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('id_population');
             $table->integer('jumlah_kematian');
             $table->integer('jam');
+            $table->timestamp('date');
 
             //Relasi
             $table->foreign('id_population')->references('id')->on('populations');

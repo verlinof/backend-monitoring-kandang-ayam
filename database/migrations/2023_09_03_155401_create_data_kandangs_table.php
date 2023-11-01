@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('data_kandangs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_kandang');
-            $table->integer('hari_ke');
             $table->float('pakan');
             $table->float('minum');
             $table->float('bobot');
