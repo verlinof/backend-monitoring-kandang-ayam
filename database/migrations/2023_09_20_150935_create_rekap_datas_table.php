@@ -12,15 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('rekap_datas', function (Blueprint $table) {
-            $table->id('id_rekap_data');
+            $table->id();
             $table->foreignId('id_kandang');
-            $table->date('hari');
-            $table->float('rata_rata_amoniak');
-            $table->float('rata_rata_suhu');
-            $table->float('rata_rata_kelembaban');
+            $table->date('date');
+            $table->float('avg_amoniak');
+            $table->float('avg_suhu');
+            $table->float('avg_kelembaban');
             $table->float('pakan');
             $table->float('minum');
             $table->integer('jumlah_kematian');
+
+            //Relasi
+            $table->foreign('id_kandang')->references('id')->on('kandangs');
         });
     }
 

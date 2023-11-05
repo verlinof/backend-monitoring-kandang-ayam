@@ -12,15 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('panens', function (Blueprint $table) {
-            $table->id('id_panen');
+            $table->id();
             $table->foreignId('id_kandang');
             $table->date('tanggal_mulai');
             $table->timestamp('tanggal_panen');
-            $table->integer("jumlah_panen");
+            $table->integer('jumlah_panen');
             $table->integer('bobot_total');
             
             //Relasi
-            $table->foreign('id_kandang')->references('id_kandang')->on('kandangs');
+            $table->foreign('id_kandang')->references('id')->on('kandangs');
         });
     }
 

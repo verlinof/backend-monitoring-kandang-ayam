@@ -2,75 +2,85 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\KandangDetailResource;
-use App\Models\Kandang;
+use App\Http\Resources\UserDetailResource;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use PhpParser\Node\Stmt\TryCatch;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    //Memperlihatkan semua kandang yang diawasi anak kandang
+    //GET semua anak kandang oleh owner
     public function index()
     {
         try{
-            $user = Auth::user();
-            
-            $kandang = Kandang::where('id_user', $user->id)->get();
-            return KandangDetailResource::collection($kandang);
+            $user = User::where('status', '!=', 'owner')->get();
+            return UserDetailResource::collection($user);
         }catch(Exception $e) {
             return response()->json([
                 "error" => $e
-            ]);
+            ],400);
         }
     }
-
-    //Get semua kandang oleh owner
-    public function ownerIndex()
+    
+    public function show($id)
     {
         try{
-            $user = Auth::user();
-            
-            $kandang = Kandang::with('User:id,username')->get();
-            return KandangDetailResource::collection($kandang);
+            $user = User::findOrFail($id);
+         
+            return new UserDetailResource($user);
         }catch(Exception $e) {
             return response()->json([
                 "error" => $e
-            ]);
+            ],400);
         }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function update(Request $request, $id)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(User $user)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, User $user)
-    {
-        //
+        try{
+            $request->validate([
+                'nama_lengkap' => '',
+                'username' => 'max:50',
+                'email' => 'email',
+                'password' => 'max:50',
+                'no_telepon' => ''
+            ]);
+            
+            $request['password'] = Hash::make($request->password);
+            $user = User::findOrFail($id);
+            $user->update($request->all());
+            
+            return new UserDetailResource($user);
+            
+        }catch(Exception $e) {
+            return response()->json([
+                "error" => $e
+            ], 404);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy(Request $request)
     {
-        //
+        try{
+            $user = Auth::user();
+            $deleteUser = User::findOrFail($user->id);
+            $deleteUser->delete();
+            $request->user()->currentAccessToken()->delete();
+
+            return response()->json([
+                "username" => $user->username,
+                "status" => "Akun Berhasil Dihapus"
+            ]);
+            
+        }catch(Exception $e){
+            return response()->json([
+                "error" => $e
+            ],404);
+        }
     }
 }

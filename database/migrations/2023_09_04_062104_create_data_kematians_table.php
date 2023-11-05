@@ -12,16 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('data_kematians', function (Blueprint $table) {
-            $table->id('id_data_kematian');
-            $table->foreignId('id_data_kandang');
-            $table->integer('kematian_terbaru');
+            $table->id();
+            $table->foreignId('id_population');
             $table->integer('jumlah_kematian');
-            $table->integer('jam_awal');
-            $table->integer('jam_akhir');
-            $table->timestamp('hari');
+            $table->integer('jam');
+            $table->timestamp('date');
 
             //Relasi
-            $table->foreign('id_data_kandang')->references('id_data_kandang')->on('data_kandangs');
+            $table->foreign('id_population')->references('id')->on('populations');
         });
     }
 

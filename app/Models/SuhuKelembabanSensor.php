@@ -10,6 +10,11 @@ class SuhuKelembabanSensor extends Model
 {
     use HasFactory;
 
+    //Waktu sudah timestamp
+    protected $fillable = [
+        'suhu', 'kelembaban'
+    ];
+
     public function Kandang(){
         return $this->belongsTo(Kandang::class);
     }

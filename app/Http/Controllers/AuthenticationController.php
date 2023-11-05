@@ -38,15 +38,14 @@ class AuthenticationController extends Controller
         
     }
 
-    public function register(Request $request)
+    public function registerAnakKandang(Request $request)
     {
         $validated = $request->validate([
             'nama_lengkap' => 'required',
             'username' => 'required|max:50',
             'email' => 'required|email',
-            'status' => 'required|in:owner,anak kandang',
             'password' => 'required|max:50',
-            'phone_number' => 'required'
+            'no_telepon' => 'required'
         ]);
    
         try{
@@ -54,9 +53,39 @@ class AuthenticationController extends Controller
                 'nama_lengkap' => $validated['nama_lengkap'],
                 'username' => $validated['username'],
                 'email' => $validated['email'],
-                'status' => $validated['status'],
+                'status' => 'anak kandang',
                 'password' => Hash::make($validated['password']),
-                'phone_number' => $validated['phone_number']
+                'no_telepon' => $validated['no_telepon']
+            ]);
+            return response()->json([
+                'username' => $user->username,
+                'status' => 'Success'
+            ],200);
+        }catch(Exception $e){
+            return response()->json([
+                'error' => $e
+            ],400);
+        } 
+    }
+
+    public function registerOwner(Request $request)
+    {
+        $validated = $request->validate([
+            'nama_lengkap' => 'required',
+            'username' => 'required|max:50',
+            'email' => 'required|email',
+            'password' => 'required|max:50',
+            'no_telepon' => 'required'
+        ]);
+   
+        try{
+            $user = User::create([
+                'nama_lengkap' => $validated['nama_lengkap'],
+                'username' => $validated['username'],
+                'email' => $validated['email'],
+                'status' => 'owner',
+                'password' => Hash::make($validated['password']),
+                'no_telepon' => $validated['no_telepon']
             ]);
             return response()->json([
                 'username' => $user->username,
@@ -72,8 +101,10 @@ class AuthenticationController extends Controller
     public function logout(Request $request)
     {
         try{
-            return $request->user()->currentAccessToken()->delete();
+            $username = $request->user()->username;
+            $request->user()->currentAccessToken()->delete();
             return response()->json([
+                "username" => $username,
                 "status" => "Berhasil Logout"
             ],200);
         }catch(Exception $e){

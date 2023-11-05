@@ -12,14 +12,10 @@ use App\Http\Resources\KandangDetailResource;
 
 class OwnerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    //GET semua kandang yang ada
     public function index()
     {
         try{
-            $user = Auth::user();
-            
             $kandang = Kandang::with('User:id,username')->get();
             return KandangDetailResource::collection($kandang);
         }catch(Exception $e) {
@@ -29,9 +25,6 @@ class OwnerController extends Controller
         }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         //
