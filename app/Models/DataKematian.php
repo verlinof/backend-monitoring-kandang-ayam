@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class DataKematian extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        "jam",
+        "jumlah_kematian",];
 
     public function DataKandang(){
         return $this->belongsTo(DataKandang::class);

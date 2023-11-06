@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('nama_kandang')->unique();
             $table->integer('luas_kandang');
             $table->string('alamat_kandang');
-
             //Relasi
             $table->foreign('id_user')->references('id')->on('users');
         });

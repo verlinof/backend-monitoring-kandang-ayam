@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\DataKandangController;
+use App\Http\Controllers\DataKematianController;
 use App\Http\Controllers\KandangController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\UserController;
@@ -34,13 +35,13 @@ Route::middleware(['auth:sanctum'])->group( function () {
     //API buat liat kandang spesifik
     Route::get('/kandang/{id}', [KandangController::class, 'show']);
 
-    
+
     /**
      * API Data Kandang
      */
     Route::get('/kandang/{id}/data-kandang', [DataKandangController::class, 'index']);
 
-    
+
     /**
      * API Account
      */
@@ -51,7 +52,6 @@ Route::middleware(['auth:sanctum'])->group( function () {
     //API Logout
     Route::get('/logout', [AuthenticationController::class, 'logout']);
     //API delete akun
-    Route::delete('/user', [UserController::class, 'destroy']);
 
 
     /**
@@ -70,6 +70,7 @@ Route::middleware(['auth:sanctum'])->group( function () {
         //Owner access bisa melihat semua kandang
         Route::get('/owner/kandang', [OwnerController::class, 'index']);
 
+        Route::delete('/user/{id}', [UserController::class, 'destroy']);
         /**
          * API User
          */
@@ -79,4 +80,11 @@ Route::middleware(['auth:sanctum'])->group( function () {
         Route::get('/owner/user/{id}', [UserController::class, 'show']);
     });
 
+    Route::middleware(['anak-kandang-access'])->group(function () {
+
+        Route::post('/anak-kandang/data-kandang',[DataKandangController::class,'store']);
+
+        Route::post('/anak-kandang/data-kematian', [DataKematianController::class,'store']);
+    });
 });
+

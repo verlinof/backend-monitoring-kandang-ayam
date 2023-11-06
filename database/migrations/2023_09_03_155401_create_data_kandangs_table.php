@@ -23,7 +23,7 @@ return new class extends Migration
             $table->foreign('id_kandang')->references('id')->on('kandangs');
         });
     }
-    
+
 
     /**
      * Reverse the migrations.

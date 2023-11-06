@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class OwnerAccess
+class AnakKandangAccess
 {
     /**
      * Handle an incoming request.
@@ -18,7 +18,7 @@ class OwnerAccess
     {
         $currentUser = Auth::user();
 
-        if($currentUser->status != "owner"){
+        if($currentUser->status != "anak kandang"){
             return response()->json([
                 'error' => 'unauthorized'
             ], 401);
