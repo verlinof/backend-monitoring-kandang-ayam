@@ -2,18 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Models\DataKandang;
-use App\Http\Requests\StoreDataKandangRequest;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateDataKandangRequest;
+use App\Http\Resources\DataKandangResource;
+use App\Models\Kandang;
 
 class DataKandangController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($id)
     {
-        //
+        try{
+            $kandang = Kandang::findOrFail($id);
+            $dataKandang = DataKandang::where('id_kandang', $id)->get();
+
+            return DataKandangResource::collection($dataKandang);
+        }catch(Exception $e) {
+            return response()->json([
+                "error" => $e
+            ],400);
+        }
+
     }
 
     /**
@@ -27,9 +41,26 @@ class DataKandangController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreDataKandangRequest $request)
+    public function store(Request $request)
     {
-        //
+        try{
+            $request->validate([
+                "pakan"=> "required|numeric",
+                "id_kandang"=> "required|exists:kandangs,id",
+                "minum"=> "required|numeric",
+                "bobot"=> "required|numeric",
+            ]);
+            $dataKandang = DataKandang::create($request->all());
+            return response()->json([
+                'message' => 'Data Kandang created successfully',
+                'data' => $dataKandang,
+            ], 201);
+
+        }catch(Exception $e) {
+            return response()->json([
+                "error" => $e
+            ], 400);
+        }
     }
 
     /**

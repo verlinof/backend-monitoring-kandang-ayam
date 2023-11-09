@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class KandangDetailResource extends JsonResource
+class DataKandangResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,11 +15,11 @@ class KandangDetailResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
-            'id_user' => $this->id_user,
-            'anak_kandang' => $this->whenLoaded('User'),
-            'nama_kandang' => $this->nama_kandang,
-            'alamat_kandang' => $this->alamat_kandang
+            "id" => $this->id,
+            "id_kandang" => $this->id_kandang,
+            "pakan" => $this->pakan,
+            "minum" => $this->minum,
+            "bobot" => $this->date,
         ];
     }
 }
