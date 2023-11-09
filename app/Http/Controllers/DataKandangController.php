@@ -9,7 +9,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateDataKandangRequest;
 use App\Http\Resources\DataKandangResource;
 use App\Models\Kandang;
-use Exception;
 
 class DataKandangController extends Controller
 {
