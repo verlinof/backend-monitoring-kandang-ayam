@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kandang', function (Blueprint $table) {
-            $table->id('id_kandang');
+        Schema::create('kandangs', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('id_user');
             $table->string('nama_kandang')->unique();
-            $table->integer('populasi_awal');
+            $table->integer('luas_kandang');
             $table->string('alamat_kandang');
-
             //Relasi
-            $table->foreign('id_user')->references('id_user')->on('users');
+            $table->foreign('id_user')->references('id')->on('users');
         });
     }
 

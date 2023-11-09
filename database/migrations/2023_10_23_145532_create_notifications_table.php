@@ -11,27 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('data_kandang', function (Blueprint $table) {
-            $table->id('id_data_kandang');
+        Schema::create('notifications', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('id_kandang');
-            $table->integer('hari_ke');
-            $table->float('pakan');
-            $table->float('minum');
-            $table->float('bobot');
+            $table->string('message');
             $table->timestamp('date');
-            $table->enum('classification',['normal','abnormal']);
 
             //Relasi
-            $table->foreign('id_kandang')->references('id_kandang')->on('kandang');
+            $table->foreign('id_kandang')->references('id')->on('kandangs');
         });
     }
-    
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('data_kandang');
+        Schema::dropIfExists('notifications');
     }
 };

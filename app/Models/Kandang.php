@@ -9,38 +9,43 @@ use App\Models\AmoniakSensor;
 use App\Models\SuhuKelembabanSensor;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Kandang extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $fillable = [
         'nama_kandang',
         'id_user',
-        'populasi'
+        'alamat_kandang',
+        'luas_kandang'
     ];
 
     protected $guarded = [
         'id_kandang'
     ];
 
-    public function User(){
-        return $this->belongsTo(User::class);
+    public function User(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'id_user', 'id');
     }
 
     public function DataKandang(){
-        return $this->hasMany(DataKandang::class);
+        return $this->hasMany(DataKandang::class, 'id_kandang', 'id');
     }
 
     public function AmoniakSensors(){
-        return $this->hasMany(AmoniakSensor::class);
+        return $this->hasMany(AmoniakSensor::class, 'id_kandang', 'id');
     }
 
     public function SuhuKelembabanSensors(){
-        return $this->hasMany(SuhuKelembabanSensor::class);
+        return $this->hasMany(SuhuKelembabanSensor::class, 'id_kandang', 'id');
     }
 
     public function Panen(){
-        return $this->hasMany(Panen::class);
+        return $this->hasMany(Panen::class, 'id_kandang', 'id');
     }
 }

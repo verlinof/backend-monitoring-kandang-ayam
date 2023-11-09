@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\SuhuKelembabanSensors>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Population>
  */
-class SuhuKelembabanSensorsFactory extends Factory
+class PopulationFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,9 +18,6 @@ class SuhuKelembabanSensorsFactory extends Factory
     {
         return [
             //
-            "id_kandang"=> 1,
-            "suhu"=> $this->faker->numberBetween(10,40),
-            "kelembaban"=> $this->faker->numberBetween(10,30),
         ];
     }
 }

@@ -11,22 +11,25 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('amoniak_sensors', function (Blueprint $table) {
+        Schema::create('data_kandangs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_kandang');
-            $table->timestamp('time');
-            $table->integer('amoniak');
+            $table->float('pakan');
+            $table->float('minum');
+            $table->float('bobot');
+            $table->timestamp('date');
 
             //Relasi
             $table->foreign('id_kandang')->references('id')->on('kandangs');
         });
     }
 
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('amoniak_sensors');
+        Schema::dropIfExists('data_kandangs');
     }
 };

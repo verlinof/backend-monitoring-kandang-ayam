@@ -14,20 +14,16 @@ class DataKandang extends Model
 
     protected $fillable = [
         'id_kandang',
-        'hari_ke',
-        'kematian',
         'pakan',
         'minum',
-        'id_user',
+        'bobot',
     ];
 
     protected $guarded = [
         'id_data_kandang'
     ];
 
-    public function User(){
-        return $this->belongsTo(User::class, 'id_user', 'id_user');
-    }
+    public $timestamps=false;
 
     public function Kandang(){
         return $this->belongsToMany(Kandang::class, 'id_kandang', 'id_user');

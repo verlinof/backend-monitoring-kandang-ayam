@@ -11,14 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('amoniak_sensors', function (Blueprint $table) {
+        Schema::create('data_kematians', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_kandang');
-            $table->timestamp('time');
-            $table->integer('amoniak');
+            $table->foreignId('id_population');
+            $table->integer('jumlah_kematian');
+            $table->integer('jam');
+            $table->timestamp('date');
 
             //Relasi
-            $table->foreign('id_kandang')->references('id')->on('kandangs');
+            $table->foreign('id_population')->references('id')->on('populations');
         });
     }
 
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('amoniak_sensors');
+        Schema::dropIfExists('data_kematians');
     }
 };

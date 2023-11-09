@@ -2,18 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\SuhuKelembabanResource;
+use App\Models\SuhuKelembabanSensor;
 use App\Models\SuhuKelembabanSensors;
-use App\Http\Requests\StoreSuhuKelembabanSensorsRequest;
-use App\Http\Requests\UpdateSuhuKelembabanSensorsRequest;
+use Exception;
+use Illuminate\Http\Request;
 
 class SuhuKelembabanSensorsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+
+    //GET semua data suhu kelembaban dari suatu kandang
+    public function index($id_kandang)
     {
-        //
+        try{
+            $suhuKelembaban = SuhuKelembabanSensor::where('id_kandang', $id_kandang)->get();
+            return SuhuKelembabanResource::collection($suhuKelembaban);
+        }catch(Exception $e){
+            return response()->json([
+                "error" => $e
+            ], 400);
+        }
+        
     }
 
     /**
@@ -27,7 +36,7 @@ class SuhuKelembabanSensorsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreSuhuKelembabanSensorsRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -35,7 +44,7 @@ class SuhuKelembabanSensorsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(SuhuKelembabanSensors $suhuKelembabanSensors)
+    public function show(SuhuKelembabanSensorsController $suhuKelembabanSensors)
     {
         //
     }
@@ -43,7 +52,7 @@ class SuhuKelembabanSensorsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(SuhuKelembabanSensors $suhuKelembabanSensors)
+    public function edit(SuhuKelembabanSensorsController $suhuKelembabanSensors)
     {
         //
     }
@@ -51,7 +60,7 @@ class SuhuKelembabanSensorsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSuhuKelembabanSensorsRequest $request, SuhuKelembabanSensors $suhuKelembabanSensors)
+    public function update(Request $request, SuhuKelembabanSensorsController $suhuKelembabanSensors)
     {
         //
     }
@@ -59,7 +68,7 @@ class SuhuKelembabanSensorsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SuhuKelembabanSensors $suhuKelembabanSensors)
+    public function destroy(SuhuKelembabanSensorsController $suhuKelembabanSensors)
     {
         //
     }
