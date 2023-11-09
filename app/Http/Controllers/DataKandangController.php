@@ -5,15 +5,28 @@ namespace App\Http\Controllers;
 use App\Models\DataKandang;
 use App\Http\Requests\StoreDataKandangRequest;
 use App\Http\Requests\UpdateDataKandangRequest;
+use App\Http\Resources\DataKandangResource;
+use App\Models\Kandang;
+use Exception;
 
 class DataKandangController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($id)
     {
-        //
+        try{
+            $kandang = Kandang::findOrFail($id);
+            $dataKandang = DataKandang::where('id_kandang', $id)->get();
+
+            return DataKandangResource::collection($dataKandang);
+        }catch(Exception $e) {
+            return response()->json([
+                "error" => $e
+            ],400);
+        }
+
     }
 
     /**
