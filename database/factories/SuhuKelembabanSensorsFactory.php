@@ -18,6 +18,9 @@ class SuhuKelembabanSensorsFactory extends Factory
     {
         return [
             //
+            "id_kandang"=> 1,
+            "suhu"=> $this->faker->numberBetween(10,40),
+            "kelembaban"=> $this->faker->numberBetween(10,30),
         ];
     }
 }

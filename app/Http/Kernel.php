@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\AnakKandangAccess;
 use App\Http\Middleware\OwnerAccess;
 use App\Http\Middleware\PemilikAkun;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
@@ -67,6 +68,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'owner-access' => OwnerAccess::class,
-        'pemilik-akun' => PemilikAkun::class
+        'pemilik-akun' => PemilikAkun::class,
+        'anak-kandang-access'=>AnakKandangAccess::class,
     ];
 }
