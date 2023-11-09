@@ -12,8 +12,10 @@ class SuhuKelembabanSensor extends Model
 
     //Waktu sudah timestamp
     protected $fillable = [
-        'suhu', 'kelembaban'
+        'suhu', 'kelembaban',
+        'id_kandang',
     ];
+    public $timestamps = false;
 
     public function Kandang(){
         return $this->belongsTo(Kandang::class);

@@ -11,6 +11,7 @@ use App\Http\Requests\StoreKandangRequest;
 use App\Http\Requests\UpdateKandangRequest;
 use App\Http\Resources\KandangDetailResource;
 use App\Models\DataKandang;
+use App\Models\Population;
 
 class KandangController extends Controller
 {
@@ -20,7 +21,7 @@ class KandangController extends Controller
     {
         try{
             $user = Auth::user();
-            
+
             $kandang = Kandang::where('id_user', $user->id)->get();
             return KandangDetailResource::collection($kandang);
         }catch(Exception $e) {
@@ -42,6 +43,7 @@ class KandangController extends Controller
             ]);
 
             $kandang = Kandang::create($request->all());
+
             return new KandangDetailResource($kandang);
 
         }catch(Exception $e) {
@@ -79,7 +81,7 @@ class KandangController extends Controller
 
             $kandang = Kandang::findOrFail($id);
             $kandang->update($request->all());
-            
+
             return new KandangDetailResource($kandang);
 
         }catch(Exception $e) {

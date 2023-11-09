@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\DataKematian;
 use App\Http\Requests\StoreDataKematianRequest;
 use App\Http\Requests\UpdateDataKematianRequest;
+use App\Models\Population;
 use Exception;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class DataKematianController extends Controller
@@ -36,14 +38,40 @@ class DataKematianController extends Controller
             $request->validate([
                 'jam' => 'required|integer',
                 'jumlah_kematian' => 'required|integer',
+                'id_population'=>'required|exists:populations,id'
             ]);
 
-            $dataKandang = DataKematian::create($request->all());
-            return response()->json([
-                'message' => 'Data Kematian created successfully',
-                'data' => $dataKandang,
-            ], 201);
 
+
+            $populasiTerkini = Population::first();
+
+            $kematian=((int)$request->jumlah_kematian);
+
+            $pop=(int)$populasiTerkini->populasi;
+
+            $seconds =(int) $request->jam;
+            $hour=$seconds*3600;
+            $time = Carbon::createFromTimestamp($hour)->format('H:i:s');
+            dd($time);
+
+            if ($pop>$kematian)
+            {
+                $populasiTerkini->populasi -= $request->jumlah_kematian;
+                $populasiTerkini->total_kematian += $request->jumlah_kematian;
+                $populasiTerkini->save();
+
+
+                $dataKematian = DataKematian::create($request->all());
+
+                return response()->json([
+                    'message' => 'Data Kematian created successfully',
+                    'data' => $dataKematian,
+                ], 201);
+            }else{
+                return response()->json([
+                    'message'=> 'tolol dikit ga ngaruh',
+                ],400 );
+            }
         }catch(Exception $e) {
             return response()->json([
                 "error" => $e

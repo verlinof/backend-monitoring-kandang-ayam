@@ -5,6 +5,7 @@ use App\Http\Controllers\DataKandangController;
 use App\Http\Controllers\DataKematianController;
 use App\Http\Controllers\KandangController;
 use App\Http\Controllers\OwnerController;
+use App\Http\Controllers\PopulationController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -82,9 +83,9 @@ Route::middleware(['auth:sanctum'])->group( function () {
 
     Route::middleware(['anak-kandang-access'])->group(function () {
 
-        Route::post('/anak-kandang/data-kandang',[DataKandangController::class,'store']);
-
+        Route::post('/anak-kandang/data-kandang',[DataKandangController::class,'store',PopulationController::class,'store']);
         Route::post('/anak-kandang/data-kematian', [DataKematianController::class,'store']);
+
     });
 });
 

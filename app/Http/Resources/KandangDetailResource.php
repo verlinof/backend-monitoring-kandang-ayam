@@ -16,7 +16,7 @@ class KandangDetailResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'id_user' => $this->id_usesr,
+            'id_user' => $this->id_user,
             'anak_kandang' => $this->whenLoaded('User'),
             'nama_kandang' => $this->nama_kandang,
             'alamat_kandang' => $this->alamat_kandang

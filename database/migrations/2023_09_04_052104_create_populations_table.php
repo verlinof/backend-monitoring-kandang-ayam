@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('id_kandang');
             $table->integer('populasi');
             $table->integer('total_kematian');
-
             $table->foreign('id_kandang')->references('id')->on('kandangs');
         });
     }

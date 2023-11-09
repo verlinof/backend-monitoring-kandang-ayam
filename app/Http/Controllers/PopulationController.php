@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Population;
 use App\Http\Requests\StorePopulationRequest;
 use App\Http\Requests\UpdatePopulationRequest;
+use Exception;
+use Illuminate\Http\Request;
 
 class PopulationController extends Controller
 {
@@ -27,9 +29,28 @@ class PopulationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePopulationRequest $request)
+    public function store(Request $request)
     {
         //
+        try{
+            $request->validate([
+                'populasi' => 'required|integer',
+                'total_kematian' => 'required|integer',
+            ]);
+
+
+            $populasi = Population::create($request->all());
+
+            return response()->json([
+                'message' => 'Data Kematian created successfully',
+                'data' => $populasi,
+            ], 201);
+
+        }catch(Exception $e) {
+            return response()->json([
+                "error" => $e
+            ], 400);
+        }
     }
 
     /**
