@@ -10,6 +10,7 @@ class Population extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id_kandang',
         'populasi',
         'total_kematian'
     ];
