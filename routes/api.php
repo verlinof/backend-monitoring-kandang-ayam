@@ -42,7 +42,11 @@ Route::middleware(['auth:sanctum'])->group( function () {
      */
     Route::get('/kandang/{id}/data-kandang', [DataKandangController::class, 'index']);
 
-
+    /**
+     * API Population
+     */
+    Route::post('owner/population', [PopulationController::class, 'store']);
+    Route::delete('owner/population/{id_kandang}', [PopulationController::class, 'destroy']);
     /**
      * API Account
      */
@@ -77,11 +81,6 @@ Route::middleware(['auth:sanctum'])->group( function () {
         Route::get('/owner/user', [UserController::class, 'index']);
         //Owner bisa melihat anak kandang berdasarkan ID
         Route::get('/owner/user/{id}', [UserController::class, 'show']);
-        /**
-         * API Population
-         */
-        Route::post('owner/population', [PopulationController::class, 'store']);
-        Route::delete('owner/population/{id_kandang}', [PopulationController::class, 'destroy']);
     });
 
     Route::middleware(['anak-kandang-access'])->group(function () {
