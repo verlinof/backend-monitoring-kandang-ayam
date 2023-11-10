@@ -37,7 +37,7 @@ class DataKematianController extends Controller
         try{
             $request->validate([
                 'jam' => 'required|integer',
-                'jumlah_kematian' => 'required|integer',
+                'kematian' => 'required|integer',
                 'id_population'=>'required|exists:populations,id'
             ]);
 
@@ -45,21 +45,19 @@ class DataKematianController extends Controller
 
             $populasiTerkini = Population::first();
 
-            $kematian=((int)$request->jumlah_kematian);
+            $kematian=((int)$request->kematian);
 
             $pop=(int)$populasiTerkini->populasi;
 
             $seconds =(int) $request->jam;
             $hour=$seconds*3600;
             $time = Carbon::createFromTimestamp($hour)->format('H:i:s');
-            dd($time);
 
             if ($pop>$kematian)
             {
-                $populasiTerkini->populasi -= $request->jumlah_kematian;
-                $populasiTerkini->total_kematian += $request->jumlah_kematian;
+                $populasiTerkini->populasi -= $request->kematian;
+                $populasiTerkini->total_kematian += $request->kematian;
                 $populasiTerkini->save();
-
 
                 $dataKematian = DataKematian::create($request->all());
 

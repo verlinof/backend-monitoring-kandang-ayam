@@ -45,8 +45,9 @@ Route::middleware(['auth:sanctum'])->group( function () {
     /**
      * API Population
      */
-    Route::post('owner/population', [PopulationController::class, 'store']);
-    Route::delete('owner/population/{id_kandang}', [PopulationController::class, 'destroy']);
+    Route::post('/population', [PopulationController::class, 'store']);
+    Route::delete('/population/{id_kandang}', [PopulationController::class, 'destroy']);
+    
     /**
      * API Account
      */
@@ -86,7 +87,7 @@ Route::middleware(['auth:sanctum'])->group( function () {
     Route::middleware(['anak-kandang-access'])->group(function () {
 
         Route::post('/anak-kandang/data-kandang',[DataKandangController::class,'store']);
-        Route::post('/anak-kandang/data-kematian', [DataKematianController::class,'store', PopulationController::class,'store']);
+        Route::post('/anak-kandang/data-kematian', [DataKematianController::class,'store']);
 
     });
 });

@@ -43,7 +43,7 @@ class PopulationController extends Controller
             $populasi = Population::create($request->all());
 
             return response()->json([
-                'message' => 'Data Kematian created successfully',
+                'message' => 'Population has been created succesfully',
                 'data' => $populasi,
             ], 201);
 
@@ -85,7 +85,8 @@ class PopulationController extends Controller
     {
         try{
             $population = Population::where('id_kandang', $id_kandang);
-            $dataKematian = DataKematian::where('id_population', $population->id)->delete();
+            $dataKematian = DataKematian::where('id_population', $population->id);
+            $dataKematian->delete();
             $population->delete();
 
             return response()->json([
