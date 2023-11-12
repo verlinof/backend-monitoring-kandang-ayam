@@ -16,6 +16,8 @@ class DataKandangController extends Controller
     public function index()
     {
         //
+        $dataKandang = DataKandang::OrderBy('date','desc')->first();
+        return response()->json($dataKandang);
     }
 
     /**

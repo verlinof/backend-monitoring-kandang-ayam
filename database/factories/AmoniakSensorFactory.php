@@ -18,6 +18,8 @@ class AmoniakSensorFactory extends Factory
     {
         return [
             //
+            "id_kandang"=> 1,
+            "amoniak"=> fake()->randomFloat(2,10,40),
         ];
     }
 }

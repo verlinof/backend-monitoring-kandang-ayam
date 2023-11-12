@@ -18,6 +18,8 @@ class DataKematianController extends Controller
     public function index()
     {
         //
+        $dataKematian = DataKematian::OrderBy('date','desc')->first();
+        return response()->json($dataKematian);
     }
 
     /**
@@ -41,9 +43,8 @@ class DataKematianController extends Controller
                 'id_population'=>'required|exists:populations,id'
             ]);
 
-
-
-            $populasiTerkini = Population::first();
+            $id_population=(int)$request->id_population;
+            $populasiTerkini = Population::where('id',$id_population)->first();
 
             $kematian=((int)$request->jumlah_kematian);
 
@@ -52,14 +53,12 @@ class DataKematianController extends Controller
             $seconds =(int) $request->jam;
             $hour=$seconds*3600;
             $time = Carbon::createFromTimestamp($hour)->format('H:i:s');
-            dd($time);
 
             if ($pop>$kematian)
             {
                 $populasiTerkini->populasi -= $request->jumlah_kematian;
                 $populasiTerkini->total_kematian += $request->jumlah_kematian;
                 $populasiTerkini->save();
-
 
                 $dataKematian = DataKematian::create($request->all());
 

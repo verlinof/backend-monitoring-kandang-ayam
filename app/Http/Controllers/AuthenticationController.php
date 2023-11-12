@@ -18,24 +18,25 @@ class AuthenticationController extends Controller
                 'username' => 'required|max:50',
                 'password' => 'required',
             ]);
-        
+
             $user = User::where('username', $request->username)->first();
-        
+
             if (! $user || ! Hash::check($request->password, $user->password)) {
                 throw ValidationException::withMessages([
                     'username' => ['The provided credentials are incorrect.'],
                 ]);
             }
-            
+
             $token = $user->createToken($user->username)->plainTextToken;
 
             return response()->json([
-                "token" => $token
+                "token" => $token,
+                'id'=>$user->id,
             ]);
         } catch (Exception $e) {
             return response()->json(['error' => $e], 500);
         }
-        
+
     }
 
     public function registerAnakKandang(Request $request)
@@ -47,7 +48,7 @@ class AuthenticationController extends Controller
             'password' => 'required|max:50',
             'no_telepon' => 'required'
         ]);
-   
+
         try{
             $user = User::create([
                 'nama_lengkap' => $validated['nama_lengkap'],
@@ -65,7 +66,7 @@ class AuthenticationController extends Controller
             return response()->json([
                 'error' => $e
             ],400);
-        } 
+        }
     }
 
     public function registerOwner(Request $request)
@@ -77,7 +78,7 @@ class AuthenticationController extends Controller
             'password' => 'required|max:50',
             'no_telepon' => 'required'
         ]);
-   
+
         try{
             $user = User::create([
                 'nama_lengkap' => $validated['nama_lengkap'],
@@ -95,7 +96,7 @@ class AuthenticationController extends Controller
             return response()->json([
                 'error' => $e
             ],400);
-        } 
+        }
     }
 
     public function logout(Request $request)

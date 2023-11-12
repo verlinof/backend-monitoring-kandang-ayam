@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\SuhuKelembabanResource;
 use App\Models\SuhuKelembabanSensor;
-use App\Models\SuhuKelembabanSensors;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -22,7 +21,7 @@ class SuhuKelembabanSensorsController extends Controller
                 "error" => $e
             ], 400);
         }
-        
+
     }
 
     /**

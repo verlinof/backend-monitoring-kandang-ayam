@@ -35,9 +35,11 @@ class AmoniakSensorController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(AmoniakSensor $amoniakSensor)
+    public function show( $id_kandang)
     {
         //
+        $sensor = AmoniakSensor::find($id_kandang,'id_kandang')->OrderBY('time','desc')->first();
+        return response()->json($sensor);
     }
 
     /**

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AmoniakSensorController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\DataKandangController;
 use App\Http\Controllers\DataKematianController;
@@ -54,6 +55,9 @@ Route::middleware(['auth:sanctum'])->group( function () {
     Route::get('/logout', [AuthenticationController::class, 'logout']);
     //API delete akun
 
+    //Api get data latest
+    Route::get('/data-kematian', [DataKematianController::class,'index']);
+    Route::get('/data-kandang', [DataKandangController::class,'index']);
 
     /**
      * API Owner
@@ -80,12 +84,12 @@ Route::middleware(['auth:sanctum'])->group( function () {
         //Owner bisa melihat anak kandang berdasarkan ID
         Route::get('/owner/user/{id}', [UserController::class, 'show']);
     });
-
     Route::middleware(['anak-kandang-access'])->group(function () {
 
-        Route::post('/anak-kandang/data-kandang',[DataKandangController::class,'store',PopulationController::class,'store']);
+        Route::post('/anak-kandang/data-kandang',[DataKandangController::class,'store']);
         Route::post('/anak-kandang/data-kematian', [DataKematianController::class,'store']);
 
     });
+    Route::get('/kandang/anak-kandang/{id}',[KandangController::class,'KandangPerAnak']);
 });
-
+Route::get('/amoniak/{id_kandang}',[AmoniakSensorController::class,'show']);
