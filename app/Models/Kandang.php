@@ -45,7 +45,8 @@ class Kandang extends Model
         return $this->hasMany(SuhuKelembabanSensor::class, 'id_kandang', 'id');
     }
 
-    public function Panen(){
+    public function panens()
+    {
         return $this->hasMany(Panen::class, 'id_kandang', 'id');
     }
 }

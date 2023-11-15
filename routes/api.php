@@ -5,6 +5,7 @@ use App\Http\Controllers\DataKandangController;
 use App\Http\Controllers\DataKematianController;
 use App\Http\Controllers\KandangController;
 use App\Http\Controllers\OwnerController;
+use App\Http\Controllers\PanenController;
 use App\Http\Controllers\PopulationController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,7 @@ Route::post('/login', [AuthenticationController::class, 'login']);
 // Register akun dibagi 2, buat anak kandang sama owner
 Route::post('/register-anak-kandang', [AuthenticationController::class, 'registerAnakKandang']);
 Route::post('/register-owner', [AuthenticationController::class, 'registerOwner']);
+
 
 Route::middleware(['auth:sanctum'])->group( function () {
     /**
@@ -57,6 +59,11 @@ Route::middleware(['auth:sanctum'])->group( function () {
     });
     //API Logout
     Route::get('/logout', [AuthenticationController::class, 'logout']);
+
+    //API Panen
+    Route::post('/panen', [PanenController::class, 'store']);
+    Route::get('/panen', [PanenController::class, 'index']);
+
 
     /**
      * API Owner
