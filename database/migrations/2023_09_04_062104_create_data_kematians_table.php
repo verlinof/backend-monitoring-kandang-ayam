@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('data_kematians', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_population');
-            $table->integer('jumlah_kematian');
+            $table->integer('kematian');
             $table->integer('jam');
             $table->timestamp('date');
 

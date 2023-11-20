@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Population;
 use App\Http\Requests\StorePopulationRequest;
 use App\Http\Requests\UpdatePopulationRequest;
+use App\Models\DataKematian;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -34,15 +35,15 @@ class PopulationController extends Controller
         //
         try{
             $request->validate([
+                'id_kandang' => 'required|integer|exists:kandangs,id',
                 'populasi' => 'required|integer',
                 'total_kematian' => 'required|integer',
             ]);
 
-
             $populasi = Population::create($request->all());
 
             return response()->json([
-                'message' => 'Data Kematian created successfully',
+                'message' => 'Population has been created succesfully',
                 'data' => $populasi,
             ], 201);
 
@@ -72,7 +73,7 @@ class PopulationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePopulationRequest $request, Population $population)
+    public function update(Population $population, Request $request)
     {
         //
     }
@@ -80,8 +81,21 @@ class PopulationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Population $population)
+    public function destroy($id_kandang)
     {
-        //
+        try{
+            $population = Population::where('id_kandang', $id_kandang);
+            $dataKematian = DataKematian::where('id_population', $population->id);
+            $dataKematian->delete();
+            $population->delete();
+
+            return response()->json([
+                "status" => "Success"
+            ],200);
+        }catch(Exception $e){
+            return response()->json([
+                "error" => $e
+            ], 400);
+        }
     }
 }

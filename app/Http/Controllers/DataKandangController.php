@@ -7,17 +7,33 @@ use App\Models\DataKandang;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateDataKandangRequest;
+use App\Http\Resources\DataKandangResource;
+use App\Models\Kandang;
 
 class DataKandangController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($id)
     {
+<<<<<<< HEAD
         //
         $dataKandang = DataKandang::OrderBy('date','desc')->first();
         return response()->json($dataKandang);
+=======
+        try{
+            $kandang = Kandang::findOrFail($id);
+            $dataKandang = DataKandang::where('id_kandang', $id)->get();
+
+            return DataKandangResource::collection($dataKandang);
+        }catch(Exception $e) {
+            return response()->json([
+                "error" => $e
+            ],400);
+        }
+
+>>>>>>> 8692102cbb792ea11efec70dcb8438da4cfc590e
     }
 
     /**

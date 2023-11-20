@@ -18,10 +18,10 @@ class Panen extends Model
 
     protected $guarded = [
         'id_panen',
-        'tanggal_panen'
+        'tanggal_panen',
     ];
 
     public function Kandang(){
-        return $this->belongsTo(Kandang::class);
+        return $this->belongsTo(Kandang::class, 'id_kandang', 'id');
     }
 }
