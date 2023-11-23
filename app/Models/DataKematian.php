@@ -11,10 +11,12 @@ class DataKematian extends Model
     use HasFactory;
     protected $fillable = [
         "jam",
-        "jumlah_kematian",
+        "kematian",
         "id_population",
     ];
-        public $timestamps=false;
+    
+    public $timestamps=false;
+    
     public function DataKandang(){
         return $this->belongsTo(DataKandang::class);
     }

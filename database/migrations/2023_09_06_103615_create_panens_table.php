@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('id_kandang');
             $table->date('tanggal_mulai');
-            $table->timestamp('tanggal_panen');
+            $table->timestamp('tanggal_panen')->nullable();
             $table->integer('jumlah_panen');
             $table->integer('bobot_total');
             

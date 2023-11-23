@@ -39,14 +39,14 @@ class DataKematianController extends Controller
         try{
             $request->validate([
                 'jam' => 'required|integer',
-                'jumlah_kematian' => 'required|integer',
+                'kematian' => 'required|integer',
                 'id_population'=>'required|exists:populations,id'
             ]);
 
             $id_population=(int)$request->id_population;
             $populasiTerkini = Population::where('id',$id_population)->first();
 
-            $kematian=((int)$request->jumlah_kematian);
+            $kematian=((int)$request->kematian);
 
             $pop=(int)$populasiTerkini->populasi;
 
@@ -56,8 +56,8 @@ class DataKematianController extends Controller
 
             if ($pop>$kematian)
             {
-                $populasiTerkini->populasi -= $request->jumlah_kematian;
-                $populasiTerkini->total_kematian += $request->jumlah_kematian;
+                $populasiTerkini->populasi -= $request->kematian;
+                $populasiTerkini->total_kematian += $request->kematian;
                 $populasiTerkini->save();
 
                 $dataKematian = DataKematian::create($request->all());

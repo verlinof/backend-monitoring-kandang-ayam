@@ -6,6 +6,7 @@ use App\Http\Controllers\DataKandangController;
 use App\Http\Controllers\DataKematianController;
 use App\Http\Controllers\KandangController;
 use App\Http\Controllers\OwnerController;
+use App\Http\Controllers\PanenController;
 use App\Http\Controllers\PopulationController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +29,7 @@ Route::post('/login', [AuthenticationController::class, 'login']);
 Route::post('/register-anak-kandang', [AuthenticationController::class, 'registerAnakKandang']);
 Route::post('/register-owner', [AuthenticationController::class, 'registerOwner']);
 
+
 Route::middleware(['auth:sanctum'])->group( function () {
     /**
      * API Kandang(Anak Kandang)
@@ -43,6 +45,11 @@ Route::middleware(['auth:sanctum'])->group( function () {
      */
     Route::get('/kandang/{id}/data-kandang', [DataKandangController::class, 'index']);
 
+    /**
+     * API Population
+     */
+    Route::post('/population', [PopulationController::class, 'store']);
+    Route::delete('/population/{id_kandang}', [PopulationController::class, 'destroy']);
 
     /**
      * API Account
@@ -53,7 +60,10 @@ Route::middleware(['auth:sanctum'])->group( function () {
     });
     //API Logout
     Route::get('/logout', [AuthenticationController::class, 'logout']);
-    //API delete akun
+
+    //API Panen
+    Route::post('/panen', [PanenController::class, 'store']);
+    Route::get('/panen', [PanenController::class, 'index']);
 
     //Api get data latest
     Route::get('/data-kematian', [DataKematianController::class,'index']);
@@ -92,4 +102,3 @@ Route::middleware(['auth:sanctum'])->group( function () {
     });
     Route::get('/kandang/anak-kandang/{id}',[KandangController::class,'KandangPerAnak']);
 });
-Route::get('/amoniak/{id_kandang}',[AmoniakSensorController::class,'show']);
