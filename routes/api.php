@@ -100,5 +100,5 @@ Route::middleware(['auth:sanctum'])->group( function () {
         Route::post('/anak-kandang/data-kematian', [DataKematianController::class,'store']);
 
     });
-    Route::get('/kandang/anak-kandang/{id}',[KandangController::class,'KandangPerAnak']);
+
 });
