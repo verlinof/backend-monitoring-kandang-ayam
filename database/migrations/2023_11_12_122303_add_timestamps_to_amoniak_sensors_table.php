@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::table('amoniak_sensors', function (Blueprint $table) {
             //
-            $table->timestamps();
         });
     }
 
