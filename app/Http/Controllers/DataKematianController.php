@@ -18,6 +18,8 @@ class DataKematianController extends Controller
     public function index()
     {
         //
+        $dataKematian = DataKematian::OrderBy('date','desc')->first();
+        return response()->json($dataKematian);
     }
 
     /**
@@ -41,9 +43,8 @@ class DataKematianController extends Controller
                 'id_population'=>'required|exists:populations,id'
             ]);
 
-
-
-            $populasiTerkini = Population::first();
+            $id_population=(int)$request->id_population;
+            $populasiTerkini = Population::where('id',$id_population)->first();
 
             $kematian=((int)$request->kematian);
 

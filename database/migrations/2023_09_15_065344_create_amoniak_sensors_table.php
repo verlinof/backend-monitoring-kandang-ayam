@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('id_kandang');
             $table->timestamp('time');
             $table->integer('amoniak');
-
             //Relasi
             $table->foreign('id_kandang')->references('id')->on('kandangs');
         });
