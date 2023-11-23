@@ -95,8 +95,9 @@ Route::middleware(['auth:sanctum'])->group( function () {
         Route::get('/owner/user/{id}', [UserController::class, 'show']);
     });
     Route::middleware(['anak-kandang-access'])->group(function () {
-
+        // anak kandang dapat meng-post data kandang yang berupa pakan,minum, bobot
         Route::post('/anak-kandang/data-kandang',[DataKandangController::class,'store']);
+        // anak kandang dapat meng-post data kematian berdasarkan jam
         Route::post('/anak-kandang/data-kematian', [DataKematianController::class,'store']);
 
     });

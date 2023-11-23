@@ -9,7 +9,7 @@ use App\Models\RekapDataHarian;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class AmoniakProccessListener
+class AmoniakProccessListener implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -29,7 +29,6 @@ class AmoniakProccessListener
         $average = AmoniakSensor::whereDate('date',$date)
         ->avg('amoniak');
 
-
         RekapDataHarian::create([
             'id_kandang'=>1,
             'date'=>$date,
@@ -37,5 +36,13 @@ class AmoniakProccessListener
             'suhu'=>10,
             'kelembaban'=>20,
         ]);
+
+        echo "Received and processing sensor data: " . json_encode([
+            'id_kandang'=>1,
+            'date'=>$date,
+            'amoniak'=> $average,
+            'suhu'=>10,
+            'kelembaban'=>20,
+        ]) . "\n";
     }
 }

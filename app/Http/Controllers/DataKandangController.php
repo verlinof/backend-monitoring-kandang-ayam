@@ -17,11 +17,6 @@ class DataKandangController extends Controller
      */
     public function index($id)
     {
-<<<<<<< HEAD
-        //
-        $dataKandang = DataKandang::OrderBy('date','desc')->first();
-        return response()->json($dataKandang);
-=======
         try{
             $kandang = Kandang::findOrFail($id);
             $dataKandang = DataKandang::where('id_kandang', $id)->get();
@@ -33,7 +28,6 @@ class DataKandangController extends Controller
             ],400);
         }
 
->>>>>>> 8692102cbb792ea11efec70dcb8438da4cfc590e
     }
 
     /**
