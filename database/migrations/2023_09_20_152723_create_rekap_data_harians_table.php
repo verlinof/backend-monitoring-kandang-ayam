@@ -14,14 +14,14 @@ return new class extends Migration
         Schema::create('rekap_data_harians', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_kandang');
-            $table->date('date');
+            $table->timestamp('date');
             $table->integer('amoniak');
             $table->integer('suhu');
             $table->integer('kelembaban');
 
             //Relasi
             $table->foreign('id_kandang')->references('id')->on('kandangs');
-            
+
         });
     }
 

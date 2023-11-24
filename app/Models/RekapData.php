@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class RekapData extends Model
 {
     use HasFactory;
+
+    public function Kandang() {
+        return $this->belongsTo(Kandang::class);
+    }
 }

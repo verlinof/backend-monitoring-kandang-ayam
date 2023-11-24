@@ -14,6 +14,6 @@ class AmoniakSensorSeeder extends Seeder
     public function run(): void
     {
         //
-        AmoniakSensor::factory()->create();
+        AmoniakSensor::factory()->count(2)->create();
     }
 }

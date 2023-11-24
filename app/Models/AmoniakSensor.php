@@ -13,7 +13,7 @@ class AmoniakSensor extends Model
         "id_kandang",
         'amoniak'
     ];
-    protected $timestamp=false;
+    public $timestamps=false;
 
     public function Kandang(){
         return $this->belongsTo(Kandang::class);
