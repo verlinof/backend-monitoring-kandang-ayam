@@ -40,7 +40,7 @@ class AmoniakProccessListener implements ShouldQueue
             $staticSuhu = 10;
             $staticKelembaban = 20;
 
-            $rekap=RekapDataHarian::create([
+            RekapDataHarian::create([
                 'id_kandang' => 1,
                 'amoniak' => $average,
                 'suhu' => $staticSuhu,

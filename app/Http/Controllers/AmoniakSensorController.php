@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\Amoniak;
+use App\Events\AmoniakProccess;
 use App\Models\AmoniakSensor;
 use App\Http\Requests\StoreAmoniakSensorRequest;
 use App\Http\Requests\UpdateAmoniakSensorRequest;
@@ -69,27 +71,9 @@ class AmoniakSensorController extends Controller
         //
     }
 
-    public function tes() {
-
-        // AmoniakSensor::truncate();
-
-        $date = Carbon::now()->subSecond()->format('Y-m-d H:i:s');
-        // dd($date);
-
-        $average =(int)AmoniakSensor::where('time', $date)->avg('amoniak')??0;
-        // dd($average);
-
-
-        // Assuming these values are placeholders; modify accordingly
-        $staticSuhu = 10;
-        $staticKelembaban = 20;
-
-        $rekap=RekapDataHarian::create([
-            'id_kandang' => 1,
-            'amoniak' => $average,
-            'suhu' => $staticSuhu,
-            'kelembaban' => $staticKelembaban,
-        ]);
-        return response()->json($rekap);
-    }
+    // public function tes() {
+    //     event(new Amoniak());
+    //     $rekap=RekapDataHarian::orderBy('id','DESC')->first();
+    //     return $rekap;
+    // }
 }

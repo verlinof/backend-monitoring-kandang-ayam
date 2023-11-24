@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\RekapDataHarian;
 use App\Http\Requests\StoreRekapDataHarianRequest;
 use App\Http\Requests\UpdateRekapDataHarianRequest;
+use App\Http\Resources\RekapDataHarianResource;
+use Exception;
 
 class RekapDataHarianController extends Controller
 {
@@ -27,17 +29,29 @@ class RekapDataHarianController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreRekapDataHarianRequest $request)
+    public function store($id_kandang)
     {
         //
+
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(RekapDataHarian $rekapDataHarian)
+    public function show($id_kandang)
     {
         //
+        try{
+            $rekap = RekapDataHarian::where('id_kandang', $id_kandang)->orderBy('date', 'DESC')->first();
+
+            // $rekap = RekapDataHarian::where('id_kandang',$id_kandang)->OrderBy('time','DESC')->first;
+
+            return new RekapDataHarianResource($rekap);
+        }catch(Exception $e) {
+            return response()->json([
+                "error" => $e
+            ],400);
+        }
     }
 
     /**

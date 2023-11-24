@@ -2,6 +2,8 @@
 
 namespace App\Console;
 
+use App\Events\Amoniak;
+use App\Events\AmoniakProccess;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -15,8 +17,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
         $schedule->exec('php artisan db:seed --class=AmoniakSensorSeeder')->everySecond();
         $schedule->call(function () {
-            $date = now();
-            event(new \App\Events\AmoniakProccess($date));
+            event(new Amoniak());
         })->everySecond();
     }
 

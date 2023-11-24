@@ -8,6 +8,8 @@ use App\Http\Controllers\KandangController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\PanenController;
 use App\Http\Controllers\PopulationController;
+use App\Http\Controllers\RekapDataController;
+use App\Http\Controllers\RekapDataHarianController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -103,5 +105,6 @@ Route::middleware(['auth:sanctum'])->group( function () {
     });
 
 });
-Route::post('/test',[AmoniakSensorController::class,'tes']);
+// Route::post('/test',[AmoniakSensorController::class,'tes']);
+Route::get('/rekap-data-harian/{id_kandang}',[RekapDataHarianController::class,'show']);
 
