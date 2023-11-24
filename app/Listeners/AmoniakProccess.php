@@ -10,7 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class AmoniakProccessListener
+class AmoniakProccessListener implements ShouldQueue
 {
     /**
      * Create the event listener.
