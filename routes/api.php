@@ -70,6 +70,7 @@ Route::middleware(['auth:sanctum'])->group( function () {
     //Api get data latest
     Route::get('/data-kematian', [DataKematianController::class,'index']);
     Route::get('/data-kandang', [DataKandangController::class,'index']);
+    Route::get('/rekap-data-harian/{id_kandang}',[RekapDataHarianController::class,'show']);
 
     /**
      * API Owner
@@ -106,5 +107,4 @@ Route::middleware(['auth:sanctum'])->group( function () {
 
 });
 // Route::post('/test',[AmoniakSensorController::class,'tes']);
-Route::get('/rekap-data-harian/{id_kandang}',[RekapDataHarianController::class,'show']);
 
