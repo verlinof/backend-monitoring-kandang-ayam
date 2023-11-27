@@ -59,4 +59,7 @@ class Kandang extends Model
     public function RekapDatas() {
         return $this->hasMany(RekapData::class,'id_kandang','id');
     }
+    public function Notifications(){
+        return $this->hasMany(Notification::class,'id_kandang','id');
+    }
 }

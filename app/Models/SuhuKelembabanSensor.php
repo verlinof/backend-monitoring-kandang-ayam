@@ -17,6 +17,7 @@ class SuhuKelembabanSensor extends Model
         'id_kandang',
     ];
 
+    public $timestamps=false;
 
     public function Kandang(){
         return $this->belongsTo(Kandang::class);

@@ -14,10 +14,10 @@ class DataKematian extends Model
         "kematian",
         "id_population",
     ];
-    
+
     public $timestamps=false;
-    
-    public function DataKandang(){
-        return $this->belongsTo(DataKandang::class);
+
+    public function Populations(){
+        return $this->belongsTo(Population::class);
     }
 }

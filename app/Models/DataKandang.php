@@ -28,8 +28,4 @@ class DataKandang extends Model
     public function Kandang(){
         return $this->belongsToMany(Kandang::class, 'id_kandang', 'id_user');
     }
-
-    public function DataKematian(){
-        return $this->hasMany(DataKematian::class);
-    }
 }

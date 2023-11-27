@@ -34,7 +34,7 @@ class ProcessAmoniak
 
         // Assuming these values are placeholders; modify accordingly
         $staticSuhu = 10;
-        $staticKelembaban = 20;
+        $staticKelembaban = 5;
 
         RekapDataHarian::create([
             'id_kandang' => 1,

@@ -6,6 +6,8 @@ use App\Events\Amoniak;
 use App\Events\AmoniakProccess;
 use App\Listeners\AmoniakProccessListener;
 use App\Listeners\ProcessAmoniak;
+use App\Models\RekapDataHarian;
+use App\Observers\RekapDataHarianObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -28,6 +30,7 @@ class EventServiceProvider extends ServiceProvider
         Amoniak::class=>[
             ProcessAmoniak::class,
         ],
+
     ];
 
     /**
@@ -36,6 +39,7 @@ class EventServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
+        RekapDataHarian::observe(RekapDataHarianObserver::class);
     }
 
     /**
@@ -43,6 +47,6 @@ class EventServiceProvider extends ServiceProvider
      */
     public function shouldDiscoverEvents(): bool
     {
-        return false;
+        return true;
     }
 }
