@@ -5,6 +5,7 @@ namespace App\Listeners;
 use App\Events\Amoniak;
 use App\Models\AmoniakSensor;
 use App\Models\RekapDataHarian;
+use App\Models\SuhuKelembabanSensor;
 use Carbon\Carbon;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -27,20 +28,32 @@ class ProcessAmoniak
         //
         $date = Carbon::now()->subSecond()->format('Y-m-d H:i:s');
         // dd($date);
+        $amo=AmoniakSensor::all();
+        $countAmo=count($amo);
+        // dd($countAmo);
+        $SS=SuhuKelembabanSensor::all();
+        $countSS=count($SS);
 
-        $average =(int)AmoniakSensor::where('time', $date)->avg('amoniak')??0;
+        if($countAmo>=500){
+            AmoniakSensor::truncate();
+        }
+
+        if($countSS>=500){
+            SuhuKelembabanSensor::truncate();
+        }
+        $averageAmoniak =(int)AmoniakSensor::where('time', $date)->avg('amoniak')??0;
+        $averageSuhu =(int)SuhuKelembabanSensor::where('time', $date)->avg('suhu')??0;
+        $averageKelembaban =(int)SuhuKelembabanSensor::where('time', $date)->avg('kelembaban')??0;
+
         // dd($average);
 
 
         // Assuming these values are placeholders; modify accordingly
-        $staticSuhu = 10;
-        $staticKelembaban = 5;
-
         RekapDataHarian::create([
             'id_kandang' => 1,
-            'amoniak' => $average,
-            'suhu' => $staticSuhu,
-            'kelembaban' => $staticKelembaban,
+            'amoniak' => $averageAmoniak,
+            'suhu' => $averageSuhu,
+            'kelembaban' => $averageKelembaban,
         ]);
     }
 }

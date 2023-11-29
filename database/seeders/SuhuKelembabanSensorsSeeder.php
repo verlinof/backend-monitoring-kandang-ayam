@@ -14,6 +14,6 @@ class SuhuKelembabanSensorsSeeder extends Seeder
     public function run(): void
     {
         //
-        SuhuKelembabanSensor::factory()->create();
+        SuhuKelembabanSensor::factory(3)->create();
     }
 }

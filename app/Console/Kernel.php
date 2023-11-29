@@ -14,11 +14,13 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
-        $schedule->exec('php artisan db:seed --class=AmoniakSensorSeeder')->everySecond();
+        // $schedule->command('inspire')
+        //      ->everySecond()
+        //      ->appendOutputTo(storage_path('logs/inspire.log'));
+        $schedule->exec('php artisan db:seed')->everySecond();
         $schedule->call(function () {
             event(new Amoniak());
-        })->everySecond();
+        })->everyTwoSeconds()->appendOutputTo(storage_path('logs/inspire.log'));
     }
 
     /**

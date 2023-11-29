@@ -24,22 +24,21 @@ class RekapDataHarianObserver
                     'message'=>"Bahaya lur Bahaya neng kandang ".$kandang->nama_kandang
                 ]);
 
-                $data=[
-                    'id_kandang'=>$rekapDataHarian->id_kandang,
-                    'message'=>"Bahaya lur Bahaya neng kandang ".$kandang->nama_kandang
-                ];
-                broadcast(new EventsNotification($data));
+
+                    $id_kandang=$rekapDataHarian->id_kandang;
+                    $message="Bahaya lur Bahaya neng kandang ".$kandang->nama_kandang;
+
+                broadcast(new EventsNotification($id_kandang,$message));
             }
             else{
                 Notification::create([
                     'id_kandang'=>$rekapDataHarian->id_kandang,
                     'message'=>"Waspada Lur Waspada neng kandang ".$kandang->nama_kandang
                 ]);
-                $data=[
-                    'id_kandang'=>$rekapDataHarian->id_kandang,
-                    'message'=>"Waspada Lur Waspada neng kandang ".$kandang->nama_kandang
-                ];
-                broadcast(new EventsNotification($data));
+
+                    $id_kandang=$rekapDataHarian->id_kandang;
+                    $message="Waspada Lur Waspada neng kandang ".$kandang->nama_kandang;
+                broadcast(new EventsNotification($id_kandang,$message));
             }
         }
     }

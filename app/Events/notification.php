@@ -17,11 +17,13 @@ class notification implements ShouldBroadcast
     /**
      * Create a new event instance.
      */
-    public $notif;
-    public function __construct($data)
+    public $id_kandang;
+    public $message;
+    public function __construct($id_kandang,$message)
     {
         //
-        $this->notif=$data;
+        $this->id_kandang=$id_kandang;
+        $this->message=$message;
     }
 
     /**

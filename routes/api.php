@@ -106,5 +106,5 @@ Route::middleware(['auth:sanctum'])->group( function () {
     });
 
 });
-// Route::post('/test',[AmoniakSensorController::class,'tes']);
+Route::get('/test',[DataKandangController::class,'test']);
 

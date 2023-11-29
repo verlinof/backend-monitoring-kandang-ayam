@@ -8,7 +8,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateDataKandangRequest;
 use App\Http\Resources\DataKandangResource;
+use App\Models\AmoniakSensor;
 use App\Models\Kandang;
+use App\Models\SuhuKelembabanSensor;
 
 class DataKandangController extends Controller
 {
@@ -93,5 +95,9 @@ class DataKandangController extends Controller
     public function destroy(DataKandang $dataKandang)
     {
         //
+    }
+
+    public function test() {
+
     }
 }
