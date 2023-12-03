@@ -9,6 +9,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class AmoniakSensor extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        "id_kandang",
+        'amoniak'
+    ];
+    protected $timestamp=false;
 
     public function Kandang(){
         return $this->belongsTo(Kandang::class);
