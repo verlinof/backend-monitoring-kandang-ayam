@@ -11,6 +11,7 @@ use App\Http\Resources\DataKandangResource;
 use App\Models\AmoniakSensor;
 use App\Models\Kandang;
 use App\Models\SuhuKelembabanSensor;
+use Carbon\Carbon;
 
 class DataKandangController extends Controller
 {
@@ -98,6 +99,25 @@ class DataKandangController extends Controller
     }
 
     public function test() {
+        $currentDateTime = Carbon::now();
 
+        // Set the time to 15:59:59 (3:59 PM) of the current day
+        $todayEndTime = Carbon::tomorrow()->setTime(15, 59, 59);
+
+        // Check if the current time is before 4:00 PM today
+        if ($currentDateTime->lessThan($todayEndTime)) {
+            // If current time is before 4:00 PM, set the end time to yesterday 3:59 PM
+            $todayEndTime = Carbon::yesterday()->setTime(23, 59, 59);
+        }
+
+        // Set the start time to yesterday at 4:00 PM
+        $yesterdayStartTime = Carbon::yesterday()->setTime(16, 0, 0);
+        $formattedYesterdayStartTime = $yesterdayStartTime->format('Y-m-d H:i:s');
+        $formattedTodayEndTime = $todayEndTime->format('Y-m-d H:i:s');
+
+        // Fetch records within the specified range
+        $dataKandangRange = DataKandang::whereBetween('date', [$formattedYesterdayStartTime, $formattedTodayEndTime])->get();
+
+        dd($dataKandangRange);
     }
 }

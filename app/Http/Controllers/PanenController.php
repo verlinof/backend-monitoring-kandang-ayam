@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Resources\DataPanenResource;
 use App\Models\Kandang;
 use App\Models\Panen;
-use App\Http\Requests\StorePanenRequest;
+
 use App\Http\Requests\UpdatePanenRequest;
 use Exception;
+use Illuminate\Http\Request;
 
 class PanenController extends Controller
 {
@@ -37,18 +38,21 @@ class PanenController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePanenRequest $request)
+    public function store(Request $request)
     {
         try{
+            // dd($request->all());
             $validatedData = $request->validate([
                 "id_kandang"=> "required|exists:kandangs,id",
                 "tanggal_mulai"=> "required|date",
                 "jumlah_panen"=> "nullable|numeric",
                 "bobot_total"=> "nullable|numeric",
             ]);
+            // dd($validatedData);
 
                 // Membuat panen
                 $panen = Panen::create($validatedData);
+                // dd($panen);
 
                 // Mendapatkan kandang yang terkait dan menyimpan relasinya
                 $kandang = Kandang::find($validatedData['id_kandang']);

@@ -13,13 +13,16 @@ class Panen extends Model
     protected $fillable = [
         'id_kandang',
         'tanggal_mulai',
-        'jumlah_panen'
+        'jumlah_panen',
+        'bobot_total'
     ];
 
     protected $guarded = [
         'id_panen',
         'tanggal_panen',
     ];
+
+    public $timestamps=false;
 
     public function Kandang(){
         return $this->belongsTo(Kandang::class, 'id_kandang', 'id');

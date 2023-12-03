@@ -44,7 +44,6 @@ class RekapDataHarianController extends Controller
         try{
             $rekap = RekapDataHarian::where('id_kandang', $id_kandang)->orderBy('date', 'DESC')->first();
 
-            // $rekap = RekapDataHarian::where('id_kandang',$id_kandang)->OrderBy('time','DESC')->first;
             return new RekapDataHarianResource($rekap);
         }catch(Exception $e) {
             return response()->json([

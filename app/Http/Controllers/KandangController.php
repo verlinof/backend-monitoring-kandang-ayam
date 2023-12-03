@@ -109,10 +109,4 @@ class KandangController extends Controller
         }
     }
 
-    public function kandangPerAnak($id){
-        $kandang = Kandang::where("id_user",$id)->get();
-        return response()->json([
-            'data'=>$kandang
-        ]);
-    }
 }
