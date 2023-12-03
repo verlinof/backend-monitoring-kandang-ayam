@@ -13,6 +13,7 @@ class AmoniakSensor extends Model
         "id_kandang",
         'amoniak'
     ];
+
     public $timestamps=false;
 
     public function Kandang(){
