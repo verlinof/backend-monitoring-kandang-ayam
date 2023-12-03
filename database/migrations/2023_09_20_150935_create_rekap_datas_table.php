@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('rekap_datas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_kandang');
-            $table->date('date');
+            $table->timestamp('date');
             $table->float('avg_amoniak');
             $table->float('avg_suhu');
             $table->float('avg_kelembaban');
