@@ -64,6 +64,7 @@ Route::middleware(['auth:sanctum'])->group( function () {
     Route::post('/panen', [PanenController::class, 'store']);
     Route::get('/panen', [PanenController::class, 'index']);
 
+    Route::get('/profile', [AuthenticationController::class, 'profile']);
 
     /**
      * API Owner

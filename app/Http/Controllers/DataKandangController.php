@@ -27,7 +27,6 @@ class DataKandangController extends Controller
                 "error" => $e
             ],400);
         }
-
     }
 
     /**

@@ -6,11 +6,24 @@ use Exception;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserDetailResource;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
 class AuthenticationController extends Controller
 {
+    public function profile()
+    {
+        try{
+            $user = Auth::user();
+
+            return new UserDetailResource($user);
+        }catch (Exception $e) {
+            return response()->json(['error' => $e], 500);
+        }
+    }
+
     public function login(Request $request)
     {
         try {
