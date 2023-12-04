@@ -14,6 +14,13 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->exec('php artisan db:seed --class=AmoniakSensorSeeder')->everySecond();
+
+//         $schedule->call(function () {
+//             $date = now();
+//             event(new \App\Events\AmoniakProccess($date));
+//         })->everySecond();
+
+
     }
 
     /**
