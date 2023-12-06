@@ -7,11 +7,7 @@ use App\Models\Kandang;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\StoreKandangRequest;
-use App\Http\Requests\UpdateKandangRequest;
 use App\Http\Resources\KandangDetailResource;
-use App\Models\DataKandang;
-use App\Models\Population;
 
 class KandangController extends Controller
 {

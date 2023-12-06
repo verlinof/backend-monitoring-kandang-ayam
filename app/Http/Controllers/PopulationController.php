@@ -16,7 +16,7 @@ class PopulationController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**

@@ -48,6 +48,7 @@ Route::middleware(['auth:sanctum'])->group( function () {
     /**
      * API Population
      */
+    Route::get('/population/{id_kandang}', [PopulationController::class, 'index']);
     Route::post('/population', [PopulationController::class, 'store']);
     Route::delete('/population/{id_kandang}', [PopulationController::class, 'destroy']);
 
