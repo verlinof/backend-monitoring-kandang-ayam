@@ -8,7 +8,9 @@ use App\Http\Controllers\KandangController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\PanenController;
 use App\Http\Controllers\PopulationController;
+use App\Http\Controllers\RekapDataController;
 use App\Http\Controllers\UserController;
+use App\Models\RekapData;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -102,5 +104,5 @@ Route::middleware(['auth:sanctum'])->group( function () {
         Route::post('/anak-kandang/data-kematian', [DataKematianController::class,'store']);
 
     });
-
+    Route::get('/rekap-data/{id_kandang}',[ RekapDataController::class,'show']);
 });

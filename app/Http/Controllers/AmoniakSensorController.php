@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\AmoniakSensor;
 use App\Http\Requests\StoreAmoniakSensorRequest;
 use App\Http\Requests\UpdateAmoniakSensorRequest;
+use App\Models\RekapDataHarian;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class AmoniakSensorController extends Controller
 {
@@ -64,5 +67,29 @@ class AmoniakSensorController extends Controller
     public function destroy(AmoniakSensor $amoniakSensor)
     {
         //
+    }
+
+    public function tes() {
+
+        // AmoniakSensor::truncate();
+
+        $date = Carbon::now()->subSecond()->format('Y-m-d H:i:s');
+        // dd($date);
+
+        $average =(int)AmoniakSensor::where('time', $date)->avg('amoniak')??0;
+        // dd($average);
+
+
+        // Assuming these values are placeholders; modify accordingly
+        $staticSuhu = 10;
+        $staticKelembaban = 20;
+
+        $rekap=RekapDataHarian::create([
+            'id_kandang' => 1,
+            'amoniak' => $average,
+            'suhu' => $staticSuhu,
+            'kelembaban' => $staticKelembaban,
+        ]);
+        return response()->json($rekap);
     }
 }
