@@ -73,9 +73,34 @@ class PopulationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Population $population, Request $request)
+    public function update(Request $request)
     {
         //
+        try {
+
+            $request->validate([
+                'id_kandang' => 'required|integer|exists:kandangs,id',
+                'populasi' => 'required|integer',
+                'total_kematian' => 'required|integer',
+            ]);
+
+            $populasi = Population::findOrFail($request->id_kandang);
+            $populasi->populasi = $request->populasi;
+            $populasi->total_kematian = $request->total_kematian;
+            $populasi->save();
+
+            return response()->json([
+                'message' => 'Population has been updated successfully',
+                'data' => $populasi,
+            ], 200);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage(),
+            ], 400);
+        }
+
+
     }
 
     /**

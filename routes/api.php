@@ -102,6 +102,8 @@ Route::middleware(['auth:sanctum'])->group( function () {
         Route::post('/anak-kandang/data-kandang',[DataKandangController::class,'store']);
         // anak kandang dapat meng-post data kematian berdasarkan jam
         Route::post('/anak-kandang/data-kematian', [DataKematianController::class,'store']);
+        // ngeupdate population
+        Route::patch('/population',[PopulationController::class,'update']);
 
     });
 
