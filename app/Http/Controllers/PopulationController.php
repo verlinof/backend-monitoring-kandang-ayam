@@ -84,17 +84,14 @@ class PopulationController extends Controller
                 'total_kematian' => 'required|integer',
             ]);
 
-            $populasi = Population::findOrFail($request->id_kandang);
-            $populasi->populasi = $request->populasi;
-            $populasi->total_kematian = $request->total_kematian;
-            $populasi->save();
+            $populasi = Population::where('id_kandang',$request->id_kandang)->update($request->all());
 
             return response()->json([
                 'message' => 'Population has been updated successfully',
                 'data' => $populasi,
             ], 200);
 
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return response()->json([
                 'error' => $e->getMessage(),
             ], 400);

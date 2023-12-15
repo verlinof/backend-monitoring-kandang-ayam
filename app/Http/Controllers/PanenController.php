@@ -7,6 +7,12 @@ use App\Models\Kandang;
 use App\Models\Panen;
 
 use App\Http\Requests\UpdatePanenRequest;
+use App\Models\AmoniakSensor;
+use App\Models\DataKandang;
+use App\Models\DataKematian;
+use App\Models\Population;
+use App\Models\RekapDataHarian;
+use App\Models\SuhuKelembabanSensor;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -53,6 +59,28 @@ class PanenController extends Controller
                 // Membuat panen
                 $panen = Panen::create($validatedData);
                 // dd($panen);
+                $input = [
+                  "id_kandang"  => $request->id_kandang,
+                  "populasi" => 0,
+                  "total_kematian" => 0
+                ];
+
+                $popul = Population::where("id_kandang", $request->id_kandang);
+                $dataKematian = DataKematian::where('id_population', $popul->id);
+                $amoniak= AmoniakSensor::where("id_kandang",$request->id_kandang);
+                $suhuKelembaban= SuhuKelembabanSensor::where("id_kandang",$request->id_kandang);
+                $dataKandang= DataKandang::where("id_kandang",$request->id_kandang);
+                $rekapharian= RekapDataHarian::where("id_kandang",$request->id_kandang);
+
+
+                $dataKematian->delete();
+                $amoniak->delete();
+                $suhuKelembaban->delete();
+                $dataKandang->delete();
+                $rekapharian->delete();
+                $popul->update($input);
+
+
 
                 // Mendapatkan kandang yang terkait dan menyimpan relasinya
                 $kandang = Kandang::find($validatedData['id_kandang']);
