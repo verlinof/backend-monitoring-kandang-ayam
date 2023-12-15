@@ -77,11 +77,11 @@ class RekapDataController extends Controller
         ->whereBetween('date',[$formattedYesterdayStartTime, $formattedTodayEndTime])
         ->get();
 
-        $totalKematian=$dataKematianRange->sum('kematian');
+        $totalKematian=$dataKematianRange->avg('kematian');
         // dd($totalKematian);
-        $avg_amoniak=$RekapDataHarian->sum('amoniak')??0;
-        $avg_suhu=$RekapDataHarian->sum('suhu')??0;
-        $avg_kelembaban=$RekapDataHarian->sum('kelembaban')??0;
+        $avg_amoniak=$RekapDataHarian->avg('amoniak')??0;
+        $avg_suhu=$RekapDataHarian->avg('suhu')??0;
+        $avg_kelembaban=$RekapDataHarian->avg('kelembaban')??0;
         // dd($avg_amoniak);
         $RekapData=RekapData::create([
             'id_kandang'=>$id_kandang,
